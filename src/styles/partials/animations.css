@@ -1,0 +1,31 @@
+@keyframes spinner {
+  0%, 100% {
+    x: 1px;
+    y: 1px;
+  }
+  12.5% {
+    x: 13px;
+    y: 1px;
+  }
+  25%, 37.5% {
+    x: 13px;
+    y: 1px;
+  }
+  50%, 62.5% {
+    x: 13px;
+    y: 13px;
+  }
+  75%, 87.5% {
+    x: 1px;
+    y: 13px;
+  }
+}
+
+.spinner-animation {
+  animation: spinner 1.6s linear infinite;
+  animation-delay: -1.6s;
+}
+
+.spinner-animation-secondary {
+  animation-delay: -1s;
+}

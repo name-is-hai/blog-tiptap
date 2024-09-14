@@ -1,0 +1,59 @@
+.ProseMirror figure[data-type='imageBlock'] {
+  margin: 0;
+}
+
+.ProseMirror figure[data-type='imageBlock'] img {
+  border-radius: 0.25rem;
+  display: block;
+  width: 100%;
+}
+
+/* Block Quote */
+.ProseMirror figure[data-type='blockquoteFigure'] {
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+  color: black;
+}
+
+.dark .ProseMirror figure[data-type='blockquoteFigure'] {
+  color: white;
+}
+
+.ProseMirror > blockquote blockquote,
+.ProseMirror [data-type='blockquoteFigure'] blockquote {
+  margin: 0;
+}
+
+.ProseMirror > blockquote blockquote > *:first-child,
+.ProseMirror [data-type='blockquoteFigure'] blockquote > *:first-child {
+  margin-top: 0;
+}
+
+.ProseMirror > blockquote blockquote > *:last-child,
+.ProseMirror [data-type='blockquoteFigure'] blockquote > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Columns */
+.ProseMirror [data-type='columns'] {
+  display: grid;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  margin-bottom: 3rem;
+}
+
+.ProseMirror [data-type='columns'].layout-sidebar-left {
+  grid-template-columns: 40fr 60fr;
+}
+
+.ProseMirror [data-type='columns'].layout-sidebar-right {
+  grid-template-columns: 60fr 40fr;
+}
+
+.ProseMirror [data-type='columns'].layout-two-column {
+  grid-template-columns: 1fr 1fr;
+}
+
+.ProseMirror [data-type='column'] {
+  overflow: auto;
+}
