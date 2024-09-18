@@ -1,83 +1,53 @@
-.ProseMirror ol {
-  list-style-type: decimal;
-}
+.ProseMirror {
+  ol {
+    @apply list-decimal;
+  }
 
-.ProseMirror ul {
-  list-style-type: disc;
-}
+  ul {
+    @apply list-disc;
+  }
 
-.ProseMirror ul,
-.ProseMirror ol {
-  padding: 0 2rem;
-  margin: 1.5rem 0;
-}
+  ul,
+  ol {
+    @apply py-0 px-8 my-6 first:mt-0 last:mb-0;
 
-.ProseMirror ul:first-child,
-.ProseMirror ol:first-child {
-  margin-top: 0;
-}
+    ul,
+    ol,
+    li {
+      @apply my-1;
+    }
 
-.ProseMirror ul:last-child,
-.ProseMirror ol:last-child {
-  margin-bottom: 0;
-}
+    p {
+      @apply mt-0 mb-1;
+    }
+  }
 
-.ProseMirror ul ul,
-.ProseMirror ul ol,
-.ProseMirror ol ul,
-.ProseMirror ol ol,
-.ProseMirror ul li,
-.ProseMirror ol li {
-  margin: 0.25rem 0;
-}
+  & > ul,
+  & > ol {
+    @apply my-8 first:mt-0 last:mb-0;
+  }
 
-.ProseMirror ul p,
-.ProseMirror ol p {
-  margin-top: 0;
-  margin-bottom: 0.25rem;
-}
+  ul[data-type='taskList'] {
+    @apply list-none p-0;
 
-.ProseMirror > ul,
-.ProseMirror > ol {
-  margin: 2rem 0;
-}
+    p {
+      @apply m-0;
+    }
 
-.ProseMirror > ul:first-child,
-.ProseMirror > ol:first-child {
-  margin-top: 0;
-}
+    li {
+      @apply flex;
 
-.ProseMirror > ul:last-child,
-.ProseMirror > ol:last-child {
-  margin-bottom: 0;
-}
+      > label {
+        @apply grow-0 shrink-0 flex-auto mt-1 mr-2 select-none;
+      }
 
-.ProseMirror ul[data-type='taskList'] {
-  list-style-type: none;
-  padding: 0;
-}
+      > div {
+        @apply flex-auto;
+      }
 
-.ProseMirror ul[data-type='taskList'] p {
-  margin: 0;
-}
-
-.ProseMirror ul[data-type='taskList'] li {
-  display: flex;
-}
-
-.ProseMirror ul[data-type='taskList'] li > label {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: auto;
-  margin-top: 0.25rem;
-  margin-right: 0.5rem;
-  user-select: none;
-}
-
-.ProseMirror ul[data-type='taskList'] li > div {
-  flex: auto;
-}
-
-.ProseMirror ul[data-type='taskList'] li[data-checked='true'] {
-  text-decoration: line-through;
+      &[data-checked='true'] {
+        @apply line-through;
+      }
+    }
+  }
 }

@@ -7,84 +7,36 @@
 @import './partials/typography.css';
 
 .ProseMirror {
-  caret-color: black;
-  outline: 0;
-  padding-right: 2rem;
-  padding-left: 5rem;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-  z-index: 0;
-}
+  @apply caret-black dark:caret-white outline-0 pr-8 pl-20 py-16 z-0 lg:pl-8 lg:pr-8;
 
-@media (min-width: 1024px) {
-  .ProseMirror {
-    padding-left: 2rem;
-    padding-right: 2rem;
+  & > * {
+    @apply mx-auto max-w-2xl;
   }
-}
 
-.dark .ProseMirror {
-  caret-color: white;
-}
+  .selection {
+    @apply inline;
+  }
 
-.ProseMirror > * {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 42rem;
-}
+  .selection,
+  *::selection {
+    @apply bg-black/10 dark:bg-white/20;
+  }
 
-.ProseMirror .selection {
-  display: inline;
-}
+  & > .react-renderer {
+    @apply my-12 first:mt-0 last:mb-0;
+  }
 
-.ProseMirror .selection,
-.ProseMirror *::selection {
-  background-color: rgba(0, 0, 0, 0.1);
-}
+  &.resize-cursor {
+    @apply cursor-col-resize;
+  }
 
-.dark .ProseMirror .selection,
-.dark .ProseMirror *::selection {
-  background-color: rgba(255, 255, 255, 0.2);
-}
+  .ProseMirror-gapcursor {
+    @apply relative w-full max-w-2xl mx-auto;
 
-.ProseMirror > .react-renderer {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
-
-.ProseMirror > .react-renderer:first-child {
-  margin-top: 0;
-}
-
-.ProseMirror > .react-renderer:last-child {
-  margin-bottom: 0;
-}
-
-.ProseMirror.resize-cursor {
-  cursor: col-resize;
-}
-
-.ProseMirror .ProseMirror-gapcursor {
-  position: relative;
-  width: 100%;
-  max-width: 42rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.ProseMirror .ProseMirror-gapcursor:after {
-  border-top-color: rgba(0, 0, 0, 0.4);
-  width: 100%;
-  top: -1.5em;
-  max-width: 42rem;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-}
-
-.dark .ProseMirror .ProseMirror-gapcursor:after {
-  border-top-color: rgba(255, 255, 255, 0.4);
+    &:after {
+      @apply border-t-black/40 dark:border-t-white/40 w-full -top-[1.5em] max-w-2xl mx-auto left-0 right-0;
+    }
+  }
 }
 
 [data-theme='slash-command'] {

@@ -1,173 +1,88 @@
-.ProseMirror p {
-  line-height: 1.625;
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-}
+.ProseMirror {
+  p {
+    @apply leading-relaxed my-3 first:mt-0 last:mb-0;
+  }
 
-.ProseMirror p:first-child {
-  margin-top: 0;
-}
+  & > p {
+    @apply my-6 first:mt-0 last:mb-0;
+  }
 
-.ProseMirror p:last-child {
-  margin-bottom: 0;
-}
+  h1 {
+    @apply text-3xl;
+  }
 
-.ProseMirror > p {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
+  h2 {
+    @apply text-2xl;
+  }
 
-.ProseMirror > p:first-child {
-  margin-top: 0;
-}
+  h3 {
+    @apply text-xl;
+  }
 
-.ProseMirror > p:last-child {
-  margin-bottom: 0;
-}
+  h4 {
+    @apply text-lg;
+  }
 
-.ProseMirror h1 {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
+  h5 {
+    @apply text-base;
+  }
 
-.ProseMirror h2 {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
+  h6 {
+    @apply text-sm;
+  }
 
-.ProseMirror h3 {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold first:mt-0 last:mb-0;
+  }
 
-.ProseMirror h4 {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
+  h1,
+  h2,
+  h3 {
+    @apply mt-12;
+  }
 
-.ProseMirror h5 {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
+  h4,
+  h5,
+  h6 {
+    @apply mt-8;
+  }
 
-.ProseMirror h6 {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
+  a.link {
+    @apply text-blue-500 font-extrabold dark:text-blue-400;
+  }
 
-.ProseMirror h1,
-.ProseMirror h2,
-.ProseMirror h3,
-.ProseMirror h4,
-.ProseMirror h5,
-.ProseMirror h6 {
-  font-weight: 700;
-}
+  mark {
+    @apply bg-red-500 rounded-sm decoration-clone text-inherit py-1 px-0 dark:bg-red-400;
+  }
 
-.ProseMirror h1:first-child,
-.ProseMirror h2:first-child,
-.ProseMirror h3:first-child,
-.ProseMirror h4:first-child,
-.ProseMirror h5:first-child,
-.ProseMirror h6:first-child {
-  margin-top: 0;
-}
+  & img {
+    @apply h-auto w-full max-w-full;
+  }
 
-.ProseMirror h1:last-child,
-.ProseMirror h2:last-child,
-.ProseMirror h3:last-child,
-.ProseMirror h4:last-child,
-.ProseMirror h5:last-child,
-.ProseMirror h6:last-child {
-  margin-bottom: 0;
-}
+  [data-type='horizontalRule'] {
+    @apply my-8 py-4 transition-all duration-100 ease-in-out cursor-pointer;
 
-.ProseMirror h1,
-.ProseMirror h2,
-.ProseMirror h3 {
-  margin-top: 3rem;
-}
+    &.ProseMirror-selectednode {
+      @apply bg-black/5 dark:bg-white/10;
 
-.ProseMirror h4,
-.ProseMirror h5,
-.ProseMirror h6 {
-  margin-top: 2rem;
-}
+      hr {
+        @apply border-t-black/30 dark:border-t-white/30;
+      }
+    }
 
-.ProseMirror a.link {
-  color: #3b82f6;
-  font-weight: 800;
-}
+    &:hover:not(&.ProseMirror-selectednode) {
+      @apply bg-black/5;
+      @apply dark:bg-white/10;
+    }
 
-.dark .ProseMirror a.link {
-  color: #60a5fa;
-}
-
-.ProseMirror mark {
-  background-color: #ef4444;
-  border-radius: 0.125rem;
-  box-decoration-break: clone;
-  color: inherit;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.dark .ProseMirror mark {
-  background-color: #f87171;
-}
-
-.ProseMirror img {
-  height: auto;
-  width: 100%;
-  max-width: 100%;
-}
-
-.ProseMirror [data-type='horizontalRule'] {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  transition-property: all;
-  transition-duration: 100ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-}
-
-.ProseMirror [data-type='horizontalRule'].ProseMirror-selectednode {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.dark .ProseMirror [data-type='horizontalRule'].ProseMirror-selectednode {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.ProseMirror [data-type='horizontalRule'].ProseMirror-selectednode hr {
-  border-top-color: rgba(0, 0, 0, 0.3);
-}
-
-.dark .ProseMirror [data-type='horizontalRule'].ProseMirror-selectednode hr {
-  border-top-color: rgba(255, 255, 255, 0.3);
-}
-
-.ProseMirror [data-type='horizontalRule']:hover:not(.ProseMirror-selectednode) {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.dark .ProseMirror [data-type='horizontalRule']:hover:not(.ProseMirror-selectednode) {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.ProseMirror [data-type='horizontalRule'] hr {
-  border: 0;
-  border-top-width: 1px;
-  border-top-style: solid;
-  border-top-color: rgba(0, 0, 0, 0.2);
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.dark .ProseMirror [data-type='horizontalRule'] hr {
-  border-top-color: rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.8);
+    hr {
+      @apply border-0 border-t border-black/20 bg-black/80;
+      @apply dark:border-white/20 dark:bg-white/80;
+    }
+  }
 }

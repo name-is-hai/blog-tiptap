@@ -2,25 +2,50 @@
 import '@/styles/index.css';
 
 import { EditorContent, useEditor } from '@tiptap/react';
-import React, { useMemo, useRef } from 'react';
+import { useRef } from 'react';
+import { Card } from '../ui/card';
+import { ImageBlockMenu } from './extensions/ImageBlock/components/ImageBlockMenu';
 import { ExtensionsKit } from './extentions-kit';
-import { EditorContext } from '@/context/EditorContext';
-import { Button } from '../ui/button';
+import TableBubbleMenu from './menus/TableBubbleMenu';
+import { ToggleBar } from './toggle-bar';
 
 export const BlogEditor = () => {
+  const menuContainerRef = useRef(null);
+
   const editor = useEditor(
     {
       autofocus: true,
-      onCreate: ({ editor }) => {
-        if (editor.isEmpty) {
-          editor.commands.setContent(`
-        <h1>This is a 1st level heading</h1>
-        <h2>This is a 2nd level heading</h2>
-        <h3>This is a 3rd level heading</h3>
-      `);
-        }
-      },
+      // onCreate: ({ editor }) => {
+      //   if (editor.isEmpty) {
+      //     editor.commands.setContent(initialContent);
+      //   }
+      // },
+      content: `
+      <p>Cyndi Lauper</p>
+        <table>
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th colspan="3">Description</th>
+            </tr>
+            <tr>
+              <td>Cyndi Lauper</td>
+              <td>Singer</td>
+              <td>Songwriter</td>
+              <td>Actress</td>
+            </tr>
+          </tbody>
+        </table>
+      `,
       extensions: ExtensionsKit(),
+      editorProps: {
+        attributes: {
+          autocomplete: 'off',
+          autocorrect: 'off',
+          autocapitalize: 'off',
+          class: 'min-h-full',
+        },
+      },
       immediatelyRender: false,
     },
     []
@@ -28,68 +53,41 @@ export const BlogEditor = () => {
   if (!editor) {
     return null;
   }
+
   return (
     <div>
-      <Button
-        onClick={() =>
-          editor.chain().focus().clearNodes().toggleHeading({ level: 1 }).run()
-        }
-        variant={editor.isActive('heading', { level: 1 }) ? 'default' : 'ghost'}
-      >
-        H1
-      </Button>
-      <Button
-        onClick={() =>
-          editor.chain().focus().clearNodes().toggleHeading({ level: 2 }).run()
-        }
-        variant={editor.isActive('heading', { level: 2 }) ? 'default' : 'ghost'}
-      >
-        H2
-      </Button>
-      <Button
-        onClick={() =>
-          editor.chain().focus().clearNodes().toggleHeading({ level: 3 }).run()
-        }
-        variant={editor.isActive('heading', { level: 3 }) ? 'default' : 'ghost'}
-      >
-        H3
-      </Button>
-      <EditorContent editor={editor} />
+      <ToggleBar editor={editor} />
+      <Card>
+        <div
+          className="flex h-full"
+          ref={menuContainerRef}
+        >
+          <div className="relative flex flex-col flex-1 h-full overflow-hidden">
+            <EditorContent
+              editor={editor}
+              className="flex-1 overflow-y-auto"
+            />
+            {/* <ContentItemMenu editor={editor} />
+              <LinkMenu
+                editor={editor}
+                appendTo={menuContainerRef}
+              />
+              <TextMenu editor={editor} />
+              <ColumnsMenu
+                editor={editor}
+                appendTo={menuContainerRef}
+              />*/}
+            <TableBubbleMenu
+              editor={editor}
+              appendTo={menuContainerRef}
+            />
+            <ImageBlockMenu
+              editor={editor}
+              appendTo={menuContainerRef}
+            />
+          </div>
+        </div>
+      </Card>
     </div>
   );
-  {
-    /* <div className="relative flex flex-col flex-1 h-full overflow-hidden">
-          <EditorHeader
-            characters={characterCount.characters()}
-            collabState={collabState}
-            users={displayedUsers}
-            words={characterCount.words()}
-            isSidebarOpen={leftSidebar.isOpen}
-            toggleSidebar={leftSidebar.toggle}
-          />
-
-          <ContentItemMenu editor={editor} />
-          <LinkMenu
-            editor={editor}
-            appendTo={menuContainerRef}
-          />
-          <TextMenu editor={editor} />
-          <ColumnsMenu
-            editor={editor}
-            appendTo={menuContainerRef}
-          />
-          <TableRowMenu
-            editor={editor}
-            appendTo={menuContainerRef}
-          />
-          <TableColumnMenu
-            editor={editor}
-            appendTo={menuContainerRef}
-          />
-          <ImageBlockMenu
-            editor={editor}
-            appendTo={menuContainerRef}
-          />
-        </div> */
-  }
 };

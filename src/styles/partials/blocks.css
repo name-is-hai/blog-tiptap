@@ -1,6 +1,7 @@
-.ProseMirror figure[data-type='imageBlock'] {
+  /* Image Block */
+/* .ProseMirror figure[data-type='imageBlock'] {
   margin: 0;
-}
+} */
 
 .ProseMirror figure[data-type='imageBlock'] img {
   border-radius: 0.25rem;
@@ -9,29 +10,20 @@
 }
 
 /* Block Quote */
-.ProseMirror figure[data-type='blockquoteFigure'] {
-  margin-top: 3.5rem;
-  margin-bottom: 3.5rem;
-  color: black;
+.ProseMirror blockquote {
+  border-left: 4px solid;
+  border-left-color: #404040;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
-.dark .ProseMirror figure[data-type='blockquoteFigure'] {
-  color: white;
-}
-
-.ProseMirror > blockquote blockquote,
-.ProseMirror [data-type='blockquoteFigure'] blockquote {
-  margin: 0;
-}
-
-.ProseMirror > blockquote blockquote > *:first-child,
-.ProseMirror [data-type='blockquoteFigure'] blockquote > *:first-child {
-  margin-top: 0;
-}
-
-.ProseMirror > blockquote blockquote > *:last-child,
-.ProseMirror [data-type='blockquoteFigure'] blockquote > *:last-child {
-  margin-bottom: 0;
+.dark .ProseMirror blockquote {
+  border-left-color: #d4d4d4;
 }
 
 /* Columns */
