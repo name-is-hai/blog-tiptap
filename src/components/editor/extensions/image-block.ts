@@ -1,7 +1,8 @@
-import { ReactNodeViewRenderer } from '@tiptap/react';
 import { mergeAttributes, Range } from '@tiptap/core';
-import { ImageBlockView } from './components/ImageBlockView';
-import { Image } from '../image';
+import { ReactNodeViewRenderer } from '@tiptap/react';
+
+import { ImageBlockView } from '../menus/components/ImageBlockView';
+import { Image } from './image';
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
@@ -19,9 +20,13 @@ declare module '@tiptap/core' {
 
 export const ImageBlock = Image.extend({
   name: 'imageBlock',
+
   group: 'block',
+
   defining: true,
+
   isolating: true,
+
   addAttributes() {
     return {
       src: {

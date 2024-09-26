@@ -9,6 +9,12 @@ export const initialContent = {
       },
       content: [
         {
+          type: 'emoji',
+          attrs: {
+            name: 'fire',
+          },
+        },
+        {
           type: 'text',
           text: ' Next.js + Tiptap Block Editor Template',
         },
@@ -32,8 +38,7 @@ export const initialContent = {
               type: 'link',
               attrs: {
                 href: 'https://tiptap.dev/',
-                target: '_blank',
-                class: null,
+                target: '',
               },
             },
           ],
@@ -308,13 +313,44 @@ export const initialContent = {
             },
           ],
         },
+        {
+          type: 'listItem',
+          content: [
+            {
+              type: 'paragraph',
+              attrs: {
+                class: null,
+                textAlign: 'left',
+              },
+              content: [
+                {
+                  type: 'text',
+                  text: 'AI implementation with text and image generation and auto completion via the ',
+                },
+                {
+                  type: 'text',
+                  marks: [
+                    {
+                      type: 'code',
+                    },
+                  ],
+                  text: 'TAB',
+                },
+                {
+                  type: 'text',
+                  text: ' key.',
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
     {
       type: 'imageBlock',
       attrs: {
         src: '/placeholder-image.jpg',
-        width: '100%',
+        width: '80%',
         align: 'center',
       },
     },
@@ -378,6 +414,78 @@ export const initialContent = {
     {
       type: 'bulletList',
       content: [
+        {
+          type: 'listItem',
+          content: [
+            {
+              type: 'paragraph',
+              attrs: {
+                class: null,
+                textAlign: 'left',
+              },
+              content: [
+                {
+                  type: 'text',
+                  text: '@tiptap-pro/extension-ai',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'listItem',
+          content: [
+            {
+              type: 'paragraph',
+              attrs: {
+                class: null,
+                textAlign: 'left',
+              },
+              content: [
+                {
+                  type: 'text',
+                  text: '@tiptap-pro/extension-details',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'listItem',
+          content: [
+            {
+              type: 'paragraph',
+              attrs: {
+                class: null,
+                textAlign: 'left',
+              },
+              content: [
+                {
+                  type: 'text',
+                  text: '@tiptap-pro/extension-details-content',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'listItem',
+          content: [
+            {
+              type: 'paragraph',
+              attrs: {
+                class: null,
+                textAlign: 'left',
+              },
+              content: [
+                {
+                  type: 'text',
+                  text: '@tiptap-pro/extension-details-summary',
+                },
+              ],
+            },
+          ],
+        },
         {
           type: 'listItem',
           content: [
@@ -1072,4 +1180,4 @@ export const initialContent = {
       },
     },
   ],
-}
+};

@@ -15,7 +15,9 @@ export const ImageBlockWidth = memo(
 
     const handleChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
-        onChange(parseInt(e.target.value));
+        const nextValue = parseInt(e.target.value);
+        onChange(nextValue);
+        setCurrentValue(nextValue);
       },
       [onChange]
     );
@@ -27,7 +29,7 @@ export const ImageBlockWidth = memo(
           type="range"
           min="25"
           max="100"
-          step="25"
+          step="1"
           onChange={handleChange}
           value={currentValue}
         />

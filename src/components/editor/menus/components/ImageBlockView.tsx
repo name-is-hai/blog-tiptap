@@ -6,16 +6,18 @@ import { useCallback, useRef } from 'react';
 interface ImageBlockViewProps {
   editor: Editor;
   getPos: () => number;
-  node: Node & {
-    attrs: {
-      src: string;
-    };
-  };
+  node: Node;
   updateAttributes: (attrs: Record<string, string>) => void;
 }
 
 export const ImageBlockView = (props: ImageBlockViewProps) => {
-  const { editor, getPos, node } = props;
+  const { editor, getPos, node } = props as ImageBlockViewProps & {
+    node: Node & {
+      attrs: {
+        src: string;
+      };
+    };
+  };
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const { src } = node.attrs;
 

@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useCallback } from 'react';
 import { sticky } from 'tippy.js';
+import { ColorHighlightComponent } from './components/ColorHighlight';
 import Table from '../extensions/Table/Table';
 
 export const TableBubbleMenu = ({ editor, appendTo }: MenuProps) => {
@@ -62,18 +63,18 @@ export const TableBubbleMenu = ({ editor, appendTo }: MenuProps) => {
     editor.chain().focus().deleteTable().run();
   }, [editor]);
 
-  const getReferenceClientRect = () => {
+  const getReferenceClientRect = useCallback(() => {
     const renderContainer = getRenderContainer(editor, 'tableWrapper');
     const rect =
       renderContainer?.getBoundingClientRect() ||
       new DOMRect(-1000, -1000, 0, 0);
 
     return rect;
-  };
+  }, [editor]);
   return (
     <BaseBubbleMenu
       editor={editor}
-      pluginKey="tableColumnMenu"
+      pluginKey="tableMenu"
       updateDelay={0}
       tippyOptions={{
         appendTo: () => {
@@ -90,7 +91,7 @@ export const TableBubbleMenu = ({ editor, appendTo }: MenuProps) => {
       shouldShow={shouldShow}
       className="bg-white dark:bg-zinc-900 shadow-xl"
     >
-      <div className="min-w-32 flex flex-row h-full items-center leading-none gap-0.5 p-2 w-full bg-background rounded-lg shadow-sm border border-border">
+      <div className="min-w-max flex flex-row h-full items-center leading-none gap-0.5 p-2 bg-background rounded-lg shadow-sm border border-border">
         <BetweenHorizontalEnd
           onClick={onAddRowAbove}
           className={cn(
@@ -174,6 +175,15 @@ export const TableBubbleMenu = ({ editor, appendTo }: MenuProps) => {
         <Separator
           orientation="vertical"
           className="mx-1 me-2 h-[16px] dark:bg-white/35 bg-zinc-900"
+        />
+        <ColorHighlightComponent
+          action={(color) => {
+            if (typeof color === 'string')
+              editor.chain().focus().setTableCellBackground(color).run();
+            if (typeof color === 'undefined')
+              editor.chain().focus().unsetTableCellBackground().run();
+          }}
+          disabled={!editor?.can().setHighlight()}
         />
         <Trash2
           onClick={onDeleteTable}

@@ -1,13 +1,16 @@
 'use client';
 import '@/styles/index.css';
 
+import { initialContent } from '@/lib/data/initialContent';
 import { EditorContent, useEditor } from '@tiptap/react';
 import { useRef } from 'react';
 import { Card } from '../ui/card';
-import { ImageBlockMenu } from './extensions/ImageBlock/components/ImageBlockMenu';
 import { ExtensionsKit } from './extentions-kit';
+import { ImageBlockMenu } from './menus/ImageBlockMenu';
+import { LinkMenu } from './menus/LinkMenu';
 import TableBubbleMenu from './menus/TableBubbleMenu';
 import { ToggleBar } from './toggle-bar';
+import { TextMenu } from './menus/TextMenu';
 
 export const BlogEditor = () => {
   const menuContainerRef = useRef(null);
@@ -15,28 +18,11 @@ export const BlogEditor = () => {
   const editor = useEditor(
     {
       autofocus: true,
-      // onCreate: ({ editor }) => {
-      //   if (editor.isEmpty) {
-      //     editor.commands.setContent(initialContent);
-      //   }
-      // },
-      content: `
-      <p>Cyndi Lauper</p>
-        <table>
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th colspan="3">Description</th>
-            </tr>
-            <tr>
-              <td>Cyndi Lauper</td>
-              <td>Singer</td>
-              <td>Songwriter</td>
-              <td>Actress</td>
-            </tr>
-          </tbody>
-        </table>
-      `,
+      onCreate: ({ editor }) => {
+        if (editor.isEmpty) {
+          editor.commands.setContent(initialContent);
+        }
+      },
       extensions: ExtensionsKit(),
       editorProps: {
         attributes: {
@@ -68,15 +54,19 @@ export const BlogEditor = () => {
               className="flex-1 overflow-y-auto"
             />
             {/* <ContentItemMenu editor={editor} />
-              <LinkMenu
-                editor={editor}
-                appendTo={menuContainerRef}
-              />
-              <TextMenu editor={editor} />
+              
               <ColumnsMenu
-                editor={editor}
-                appendTo={menuContainerRef}
-              />*/}
+              editor={editor}
+              appendTo={menuContainerRef}
+            />*/}
+            <TextMenu
+              editor={editor}
+              appendTo={menuContainerRef}
+            />
+            <LinkMenu
+              editor={editor}
+              appendTo={menuContainerRef}
+            />
             <TableBubbleMenu
               editor={editor}
               appendTo={menuContainerRef}

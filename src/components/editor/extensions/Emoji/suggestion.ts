@@ -1,8 +1,11 @@
-import { Editor, ReactRenderer } from '@tiptap/react';
+import { Editor } from '@tiptap/core';
+import { ReactRenderer } from '@tiptap/react';
 import { SuggestionKeyDownProps, SuggestionProps } from '@tiptap/suggestion';
-import tippy, { Instance } from 'tippy.js';
+import tippy from 'tippy.js';
 
 import EmojiList from './components/EmojiList';
+import { EmojiListProps } from './types';
+import { RefAttributes } from 'react';
 
 export const emojiSuggestion = {
   items: ({ editor, query }: { editor: Editor; query: string }) =>
@@ -18,19 +21,26 @@ export const emojiSuggestion = {
   allowSpaces: false,
 
   render: () => {
-    let component: ReactRenderer;
-    let popup: Instance[] = []; // Treat popup as an array of instances
+    let component: ReactRenderer<
+      { onKeyDown: (evt: SuggestionKeyDownProps) => boolean },
+      EmojiListProps &
+        RefAttributes<{ onKeyDown: (evt: SuggestionKeyDownProps) => boolean }>
+    >;
+    let popup: ReturnType<typeof tippy>;
 
     return {
       onStart: (props: SuggestionProps<any>) => {
         component = new ReactRenderer(EmojiList, {
           props,
           editor: props.editor,
-        });
+        }) as ReactRenderer<
+          { onKeyDown: (evt: SuggestionKeyDownProps) => boolean },
+          EmojiListProps &
+            RefAttributes<{ onKeyDown: (evt: SuggestionKeyDownProps) => boolean }>
+        >;
 
-        // Create the tippy instance(s), which are always handled as an array
         popup = tippy('body', {
-          getReferenceClientRect: () => props.clientRect?.() || new DOMRect(),
+          getReferenceClientRect: props.clientRect as () => DOMRect,
           appendTo: () => document.body,
           content: component.element,
           showOnCreate: true,
@@ -39,33 +49,27 @@ export const emojiSuggestion = {
           placement: 'bottom-start',
         });
       },
-
       onUpdate(props: SuggestionProps<any>) {
         component.updateProps(props);
 
-        // Safely handle updating props for all instances in the array
-        popup.forEach((instance) => {
-          instance.setProps({
-            getReferenceClientRect: () => props.clientRect?.() || new DOMRect(),
-          });
+        popup[0].setProps({
+          getReferenceClientRect: props.clientRect as () => DOMRect,
         });
       },
 
       onKeyDown(props: SuggestionKeyDownProps) {
         if (props.event.key === 'Escape') {
-          // Safely hide all instances
-          popup.forEach((instance) => instance.hide());
+          popup[0].hide();
           component.destroy();
 
           return true;
         }
 
-        return (component.ref as any)?.onKeyDown?.(props);
+        return component.ref?.onKeyDown(props) ?? false;
       },
 
       onExit() {
-        // Safely destroy all instances
-        popup.forEach((instance) => instance.destroy());
+        popup[0].destroy();
         component.destroy();
       },
     };

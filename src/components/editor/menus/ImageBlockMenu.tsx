@@ -1,4 +1,4 @@
-import { MenuProps } from '@/components/editor/menus/types';
+import { MenuProps, ShouldShowProps } from '@/components/editor/menus/types';
 import { Button } from '@/components/ui/button';
 import {
   Tooltip,
@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { getRenderContainer } from '@/lib/utils';
-import { BubbleMenu as BaseBubbleMenu } from '@tiptap/react';
+import { BubbleMenu as BaseBubbleMenu, isActive } from '@tiptap/react';
 import {
   AlignHorizontalDistributeEnd,
   AlignHorizontalDistributeStart,
@@ -15,7 +15,8 @@ import {
 } from 'lucide-react';
 import { useCallback, useId, useRef } from 'react';
 import { Instance, sticky } from 'tippy.js';
-import { ImageBlockWidth } from './ImageBlockWidth';
+import ImageBlock from '../extensions/image-block';
+import { ImageBlockWidth } from './components/ImageBlockWidth';
 
 export const ImageBlockMenu = ({ editor, appendTo }: MenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -31,7 +32,7 @@ export const ImageBlockMenu = ({ editor, appendTo }: MenuProps) => {
   }, [editor]);
 
   const shouldShow = useCallback(() => {
-    const isActive = editor.isActive('imageBlock');
+    const isActive = editor.isActive(ImageBlock.name);
 
     return isActive;
   }, [editor]);
@@ -75,26 +76,28 @@ export const ImageBlockMenu = ({ editor, appendTo }: MenuProps) => {
     <BaseBubbleMenu
       editor={editor}
       pluginKey={`imageBlockMenu-${useId()}`}
-      shouldShow={shouldShow}
       updateDelay={0}
       tippyOptions={{
+        appendTo: () => {
+          return appendTo?.current;
+        },
         offset: [0, 8],
         popperOptions: {
           modifiers: [{ name: 'flip', enabled: false }],
         },
         getReferenceClientRect,
-        onCreate: (instance: Instance) => {
-          tippyInstance.current = instance;
-        },
-        appendTo: () => {
-          return appendTo?.current;
-        },
         plugins: [sticky],
         sticky: 'popper',
       }}
+      shouldShow={shouldShow}
+      className="bg-white dark:bg-zinc-900 shadow-xl"
     >
-      <TooltipProvider>
-        <div ref={menuRef}>
+      <div
+        ref={menuRef}
+        hidden={shouldShow()}
+        className="min-w-max flex flex-row h-full items-center leading-none gap-0.5 p-2 bg-background rounded-lg shadow-sm border border-border"
+      >
+        <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -143,12 +146,12 @@ export const ImageBlockMenu = ({ editor, appendTo }: MenuProps) => {
             </TooltipTrigger>
             <TooltipContent>Align image left </TooltipContent>
           </Tooltip>
-        </div>
-      </TooltipProvider>
-      <ImageBlockWidth
-        onChange={onWidthChange}
-        value={parseInt(editor.getAttributes('imageBlock').width ?? 100)}
-      />
+        </TooltipProvider>
+        <ImageBlockWidth
+          onChange={onWidthChange}
+          value={parseInt(editor.getAttributes('imageBlock').width ?? 100)}
+        />
+      </div>
     </BaseBubbleMenu>
   );
 };

@@ -111,7 +111,7 @@ const EmojiList = forwardRef((props: EmojiListProps, ref) => {
             />
           ) : (
             item.emoji
-          )}{' '}
+          )}
           <span className="truncate text-ellipsis">:{item.name}:</span>
         </Button>
       ))}
