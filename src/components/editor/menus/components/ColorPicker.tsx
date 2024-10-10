@@ -4,7 +4,13 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { COLORS_LIST, DEFAULT_COLOR } from '@/lib/constants';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 
 interface Props {
   children: React.ReactNode;
@@ -20,19 +26,19 @@ export const ColorPicker = ({
   highlight = false,
   disabled = false,
   onChange,
-  onModelValueChange,
   children,
 }: Props) => {
-  const [html5Color, setHtml5Color] = useState<HTMLInputElement | null>(null);
+  const html5Color = useRef<HTMLInputElement | null>(null);
   const [recentColors, setRecentColors] = useState<string[]>([]);
+  const [tempColor, setTempColor] = useState<string | undefined>(undefined);
 
-  // Local storage key for recent colors
-  const localStorageKey = highlight ? 'recentColorsHighlight' : 'recentColors';
+  const localStorageKey = useMemo(
+    () => (highlight ? 'recentColorsHighlight' : 'recentColors'),
+    [highlight]
+  );
 
-  // Fetch recent colors from localStorage
   useEffect(() => {
     const storedColors = localStorage.getItem(localStorageKey);
-
     if (storedColors) {
       setRecentColors(JSON.parse(storedColors));
     }
@@ -43,89 +49,69 @@ export const ColorPicker = ({
   }, [recentColors, localStorageKey]);
 
   const chunkedColors = useMemo(() => {
-    const chunks: string[][] = [];
-    COLORS_LIST.forEach((color, index) => {
+    return COLORS_LIST.reduce((chunks, color, index) => {
       const chunkIndex = Math.floor(index / 10);
       if (!chunks[chunkIndex]) chunks[chunkIndex] = [];
       chunks[chunkIndex].push(color);
-    });
-    return chunks;
+      return chunks;
+    }, [] as string[][]);
   }, []);
 
-  const updateRecentColors = (color: string) => {
-    const index = recentColors.indexOf(color);
-    if (index !== -1) {
-      recentColors.splice(index, 1);
-    }
-    setRecentColors([color, ...recentColors.slice(0, 9)]); // Limit to 10 colors
-  };
+  const updateRecentColors = useCallback((color: string) => {
+    setRecentColors((prevColors) => {
+      const filteredColors = prevColors.filter((c) => c !== color);
+      return [color, ...filteredColors.slice(0, 9)];
+    });
+  }, []);
 
-  const handleSetColor = (color: string | undefined) => {
-    if (color === undefined) {
-      onModelValueChange?.(color);
-      onChange?.(color);
-      return;
-    }
+  const handleSetColor = useCallback(
+    (color: string | undefined) => {
+      const isCorrectColor = color
+        ? /^#([0-9A-F]{3}){1,2}$/i.test(color)
+        : true;
 
-    const isCorrectColor = /^#([0-9A-F]{3}){1,2}$/i.test(color);
-    if (isCorrectColor) {
-      onModelValueChange?.(color);
-      onChange?.(color);
-      updateRecentColors(color);
-    }
-  };
+      if (isCorrectColor) {
+        setTempColor(color);
+        onChange?.(color);
+      }
+    },
+    [onChange]
+  );
 
-  const handleHtml5ColorClick = () => {
-    if (html5Color) html5Color.click();
-  };
+  const handlePopoverClose = useCallback(() => {
+    if (tempColor) {
+      updateRecentColors(tempColor);
+    }
+    setTempColor(undefined);
+  }, [tempColor, updateRecentColors]);
 
   return (
-    <Popover>
+    <Popover onOpenChange={(open) => open && !disabled && handlePopoverClose()}>
       <PopoverTrigger disabled={disabled}>{children}</PopoverTrigger>
       <PopoverContent>
         <div className="flex flex-col">
-          {highlight ? (
-            <div
-              className="flex items-center p-1 cursor-pointer hover:bg-accent"
-              onClick={() => handleSetColor(undefined)}
-            >
-              <span className="w-6 h-6 p-0.5 inline-block rounded-sm border relative after:border-b-2 after:border-b-red-500 after:top-[10px] after:h-0 after:left-0 after:w-6 after:absolute after:block after:rotate-[45deg]">
-                <svg
-                  viewBox="0 0 18 18"
-                  style={{ fill: 'rgba(0, 0, 0, 0.4)', display: 'none' }}
-                >
-                  <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path>
-                </svg>
-              </span>
-              <span className="text-sm ml-1 font-light">No Fill</span>
-            </div>
-          ) : (
-            <div
-              className="flex items-center p-1 cursor-pointer hover:bg-accent"
-              onClick={() => handleSetColor(undefined)}
-            >
-              <span className="w-6 h-6 p-0.5 inline-block rounded-sm border">
-                <span
-                  style={{ backgroundColor: DEFAULT_COLOR }}
-                  className="relative w-[18px] h-[18px] block rounded-[2px]"
-                >
-                  <svg
-                    viewBox="0 0 18 18"
-                    style={{ fill: 'rgba(255, 255, 255)', display: 'none' }}
-                  >
-                    <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path>
-                  </svg>
-                </span>
-              </span>
-              <span className="text-sm ml-1 font-light">Default</span>
-            </div>
-          )}
+          <div
+            className="flex items-center p-1 cursor-pointer hover:bg-accent"
+            onClick={() => handleSetColor(undefined)}
+          >
+            <span className="w-6 h-6 p-0.5 inline-block rounded-sm border">
+              <span
+                style={{
+                  backgroundColor: highlight ? 'transparent' : DEFAULT_COLOR,
+                }}
+                className={`relative w-[18px] h-[18px] block rounded-[2px] ${highlight ? '' : 'border'}`}
+              />
+            </span>
+            <span className="text-sm ml-1 font-light">
+              {highlight ? 'No Fill' : 'Default'}
+            </span>
+          </div>
 
           <div className="px-1">
             {chunkedColors.map((colors, index) => (
               <div
                 key={index}
-                className="flex p-0 w-full h-auto relative last:pb-2"
+                className="flex p-0 gap-0.5 w-full h-auto relative last:pb-2"
               >
                 {colors.map((color, idx) => (
                   <span
@@ -137,17 +123,7 @@ export const ColorPicker = ({
                       style={{ backgroundColor: color }}
                       className="relative w-[18px] h-[18px] block rounded-[2px]"
                     >
-                      {color !== modelValue ? (
-                        <svg
-                          viewBox="0 0 18 18"
-                          style={{
-                            fill: 'rgba(255, 255, 255)',
-                            display: 'none',
-                          }}
-                        >
-                          <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path>
-                        </svg>
-                      ) : (
+                      {color === modelValue && (
                         <svg
                           className="absolute top-[-1px] left-[1px] w-3 h-3"
                           viewBox="0 0 18 18"
@@ -178,17 +154,7 @@ export const ColorPicker = ({
                       <span
                         style={{ backgroundColor: color }}
                         className="relative w-[18px] h-[18px] block rounded-[2px]"
-                      >
-                        <svg
-                          viewBox="0 0 18 18"
-                          style={{
-                            fill: 'rgba(255, 255, 255)',
-                            display: 'none',
-                          }}
-                        >
-                          <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path>
-                        </svg>
-                      </span>
+                      />
                     </span>
                   ))}
                 </div>
@@ -198,16 +164,16 @@ export const ColorPicker = ({
           <div className="relative">
             <div
               className="text-sm hover:cursor-pointer hover:bg-accent py-1.5 pl-1 font-light"
-              onClick={handleHtml5ColorClick}
+              onClick={() => html5Color.current?.click()}
             >
-              More Colors...
+              Custom
             </div>
             <input
+              ref={html5Color}
               type="color"
-              ref={(input) => setHtml5Color(input)}
+              className="invisible absolute left-0 top-4"
+              defaultValue={modelValue}
               onChange={(e) => handleSetColor(e.target.value)}
-              className="absolute left-0 top-4"
-              style={{ visibility: 'hidden' }}
             />
           </div>
         </div>

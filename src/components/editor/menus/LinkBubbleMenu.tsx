@@ -4,7 +4,10 @@ import { LinkEditorPanel } from './components/LinkEditorPanel';
 import { LinkPreviewPanel } from './components/LinkPreviewPanel';
 import { MenuProps } from './types';
 
-export const LinkMenu = ({ editor, appendTo }: MenuProps): JSX.Element => {
+export const LinkBubbleMenu = ({
+  editor,
+  appendTo,
+}: MenuProps): JSX.Element => {
   const [showEdit, setShowEdit] = useState(false);
   const { link, target } = useEditorState({
     editor,

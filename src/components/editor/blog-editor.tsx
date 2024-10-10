@@ -6,11 +6,12 @@ import { EditorContent, useEditor } from '@tiptap/react';
 import { useRef } from 'react';
 import { Card } from '../ui/card';
 import { ExtensionsKit } from './extentions-kit';
-import { ImageBlockMenu } from './menus/ImageBlockMenu';
-import { LinkMenu } from './menus/LinkMenu';
+import ColumnsMenu from './menus/ColumnsMenu';
+import { ImageBubbleMenu } from './menus/ImageBubbleMenu';
+import { LinkBubbleMenu } from './menus/LinkBubbleMenu';
 import TableBubbleMenu from './menus/TableBubbleMenu';
+import { TextBubbleMenu } from './menus/TextBubbleMenu';
 import { ToggleBar } from './toggle-bar';
-import { TextMenu } from './menus/TextMenu';
 
 export const BlogEditor = () => {
   const menuContainerRef = useRef(null);
@@ -33,6 +34,11 @@ export const BlogEditor = () => {
         },
       },
       immediatelyRender: false,
+      onUpdate: ({ editor }) => {
+        if (!editor.isEmpty) {
+          console.log(editor.getJSON());
+        }
+      },
     },
     []
   );
@@ -55,15 +61,16 @@ export const BlogEditor = () => {
             />
             {/* <ContentItemMenu editor={editor} />
               
-              <ColumnsMenu
-              editor={editor}
-              appendTo={menuContainerRef}
-            />*/}
-            <TextMenu
+            */}
+            <ColumnsMenu
               editor={editor}
               appendTo={menuContainerRef}
             />
-            <LinkMenu
+            <TextBubbleMenu
+              editor={editor}
+              appendTo={menuContainerRef}
+            />
+            <LinkBubbleMenu
               editor={editor}
               appendTo={menuContainerRef}
             />
@@ -71,7 +78,7 @@ export const BlogEditor = () => {
               editor={editor}
               appendTo={menuContainerRef}
             />
-            <ImageBlockMenu
+            <ImageBubbleMenu
               editor={editor}
               appendTo={menuContainerRef}
             />

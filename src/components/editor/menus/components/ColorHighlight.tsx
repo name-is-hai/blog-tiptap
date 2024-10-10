@@ -31,7 +31,7 @@ export const ColorHighlightComponent = ({
         onClick={toggleColor}
         className={cn(
           buttonVariants({ variant: 'ghost', size: 'icon' }),
-          'size-8 p-2',
+          'size-[34px] p-2',
           !disabled && 'opacity-50 cursor-not-allowed pointer-events-none'
         )}
         width="18px"
@@ -65,7 +65,7 @@ export const ColorHighlightComponent = ({
             </g>
             <path
               d="M51,218 L205,218 C211.075132,218 216,222.924868 216,229 C216,235.075132 211.075132,240 205,240 L51,240 C44.9248678,240 40,235.075132 40,229 C40,222.924868 44.9248678,218 51,218 Z"
-              fill={selectedColor || '#FBDE28'}
+              fill={selectedColor || 'currentColor'}
             ></path>
           </g>
         </g>
@@ -74,13 +74,13 @@ export const ColorHighlightComponent = ({
         modelValue={selectedColor}
         onChange={onChange}
         highlight
-        disabled={disabled}
+        disabled={!disabled}
       >
         <svg
           className={cn(
             buttonVariants({ variant: 'ghost', size: 'icon' }),
             'w-3 h-[32px] rounded-l-none hover:bg-muted-foreground/20',
-            disabled && 'opacity-50 cursor-not-allowed pointer-events-none'
+            !disabled && 'opacity-50 cursor-not-allowed pointer-events-none'
           )}
           width="1em"
           height="1em"

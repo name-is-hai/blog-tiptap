@@ -12,6 +12,7 @@ import Italic from '@tiptap/extension-italic';
 import ListItem from '@tiptap/extension-list-item';
 import OrderedList from '@tiptap/extension-ordered-list';
 import Paragraph from '@tiptap/extension-paragraph';
+import Placeholder from '@tiptap/extension-placeholder';
 import Strike from '@tiptap/extension-strike';
 import Subscript from '@tiptap/extension-subscript';
 import Superscript from '@tiptap/extension-superscript';
@@ -27,6 +28,8 @@ import Typography from '@tiptap/extension-typography';
 import Underline from '@tiptap/extension-underline';
 
 import Emoji from './extensions/Emoji/emoji';
+import Columns from './extensions/MultiColumn/Columns';
+import SlashCommand from './extensions/SlashCommand/slash-command';
 import TableCellBackground from './extensions/Table/CellBackground';
 import Table from './extensions/Table/Table';
 import CodeBlockLowlight from './extensions/code-block';
@@ -39,8 +42,25 @@ import ImageBlock from './extensions/image-block';
 import Link from './extensions/link';
 import Selection from './extensions/selection';
 import { TrailingNode } from './extensions/trailing-node';
+import Column from './extensions/MultiColumn/Column';
 
 export const ExtensionsKit = () => [
+  Placeholder.configure({
+    includeChildren: true,
+    showOnlyCurrent: false,
+    placeholder: ({ node }) => {
+      const nodeTypeName = node?.type?.name;
+      if (nodeTypeName === 'heading') {
+        return `Heading ${node.attrs.level}`;
+      }
+      if (nodeTypeName === 'table' || nodeTypeName === 'codeBlock') {
+        return '';
+      }
+      // if (pos === 0) {
+      // }
+      return "Press '/' for commands";
+    },
+  }),
   Document,
   Paragraph,
   Text,
@@ -90,4 +110,7 @@ export const ExtensionsKit = () => [
   }),
   TrailingNode,
   Typography,
+  SlashCommand,
+  Columns,
+  Column,
 ];

@@ -70,7 +70,7 @@ export const useTextMenuStates = (editor: Editor) => {
           currentHighlight:
             ctx.editor.getAttributes('highlight')?.color || undefined,
           disabled: () =>
-            !ctx.editor.can().chain().focus().toggleHighlight().run(),
+            ctx.editor.can().chain().focus().toggleHighlight().run(),
         },
         Size: {
           currentSize:

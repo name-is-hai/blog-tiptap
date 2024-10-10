@@ -38,7 +38,7 @@ export const LinkPreviewPanel = ({
       />
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <Button
               onClick={onEdit}
               variant={'ghost'}
@@ -50,7 +50,7 @@ export const LinkPreviewPanel = ({
           <TooltipContent>Edit link</TooltipContent>
         </Tooltip>
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <Button
               onClick={onClear}
               variant={'ghost'}

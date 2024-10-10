@@ -1,10 +1,10 @@
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-import { Editor, isTextSelection } from '@tiptap/react';
 import HorizontalRule from '@/components/editor/extensions/horizontal-rule';
 import ImageBlock from '@/components/editor/extensions/image-block';
-import { CodeBlock } from '@tiptap/extension-code-block';
 import Link from '@/components/editor/extensions/link';
+import { CodeBlock } from '@tiptap/extension-code-block';
+import { Editor, isTextSelection } from '@tiptap/react';
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -73,27 +73,18 @@ export const isTextSelected = ({ editor }: { editor: Editor }) => {
   return true;
 };
 
-export const isTableGripSelected = (node: HTMLElement) => {
+export const isTableCellSelected = (node: HTMLElement) => {
   let container = node;
 
   while (container && !['TD', 'TH'].includes(container.tagName)) {
     container = container.parentElement!;
   }
 
-  const gripColumn =
+  const cell =
     container &&
     container.querySelector &&
-    container.querySelector('a.grip-column.selected');
-  const gripRow =
-    container &&
-    container.querySelector &&
-    container.querySelector('a.grip-row.selected');
-
-  if (gripColumn || gripRow) {
-    return true;
-  }
-
-  return false;
+    container.querySelector('.selectedCell');
+  return cell ? true : false;
 };
 
 export const isCustomNodeSelected = (editor: Editor, node: HTMLElement) => {
@@ -108,6 +99,6 @@ export const isCustomNodeSelected = (editor: Editor, node: HTMLElement) => {
 
   return (
     customNodes.some((type) => editor.isActive(type)) ||
-    isTableGripSelected(node)
+    isTableCellSelected(node)
   );
 };

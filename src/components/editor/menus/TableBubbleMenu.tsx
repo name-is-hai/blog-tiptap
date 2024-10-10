@@ -89,7 +89,6 @@ export const TableBubbleMenu = ({ editor, appendTo }: MenuProps) => {
         sticky: 'popper',
       }}
       shouldShow={shouldShow}
-      className="bg-white dark:bg-zinc-900 shadow-xl"
     >
       <div className="min-w-max flex flex-row h-full items-center leading-none gap-0.5 p-2 bg-background rounded-lg shadow-sm border border-border">
         <BetweenHorizontalEnd
