@@ -28,10 +28,11 @@ import Typography from '@tiptap/extension-typography';
 import Underline from '@tiptap/extension-underline';
 
 import Emoji from './extensions/Emoji/emoji';
+import Column from './extensions/MultiColumn/Column';
 import Columns from './extensions/MultiColumn/Columns';
 import SlashCommand from './extensions/SlashCommand/slash-command';
-import TableCellBackground from './extensions/Table/CellBackground';
-import Table from './extensions/Table/Table';
+import TableCellBackground from './extensions/Table/cell-background';
+import Table from './extensions/Table/table';
 import CodeBlockLowlight from './extensions/code-block';
 import Document from './extensions/document';
 import Figcaption from './extensions/figcaption';
@@ -42,7 +43,7 @@ import ImageBlock from './extensions/image-block';
 import Link from './extensions/link';
 import Selection from './extensions/selection';
 import { TrailingNode } from './extensions/trailing-node';
-import Column from './extensions/MultiColumn/Column';
+import { ButtonExtension } from './extensions/Button/button';
 
 export const ExtensionsKit = () => [
   Placeholder.configure({
@@ -113,4 +114,5 @@ export const ExtensionsKit = () => [
   SlashCommand,
   Columns,
   Column,
+  ButtonExtension,
 ];

@@ -1,9 +1,9 @@
 'use client';
-import '@/styles/index.css';
 
+import '@/styles/index.css';
 import { initialContent } from '@/lib/data/initialContent';
-import { EditorContent, useEditor } from '@tiptap/react';
-import { useRef } from 'react';
+import { EditorContent, generateHTML, useEditor } from '@tiptap/react';
+import { useRef, useState } from 'react';
 import { Card } from '../ui/card';
 import { ExtensionsKit } from './extentions-kit';
 import ColumnsMenu from './menus/ColumnsMenu';
@@ -12,8 +12,17 @@ import { LinkBubbleMenu } from './menus/LinkBubbleMenu';
 import TableBubbleMenu from './menus/TableBubbleMenu';
 import { TextBubbleMenu } from './menus/TextBubbleMenu';
 import { ToggleBar } from './toggle-bar';
+import { Button } from '../ui/button';
+import { tiptapHtml } from '@/lib/tiptap-html';
 
 export const BlogEditor = () => {
+  const [content, setContent] = useState('');
+  const openNewWindow = () => {
+    const newWindow = window.open('', '_blank');
+    if (!newWindow) return;
+    newWindow.document.write(tiptapHtml(content));
+    newWindow.document.close();
+  };
   const menuContainerRef = useRef(null);
 
   const editor = useEditor(
@@ -22,6 +31,7 @@ export const BlogEditor = () => {
       onCreate: ({ editor }) => {
         if (editor.isEmpty) {
           editor.commands.setContent(initialContent);
+          setContent(generateHTML(editor.getJSON(), ExtensionsKit()));
         }
       },
       extensions: ExtensionsKit(),
@@ -36,7 +46,8 @@ export const BlogEditor = () => {
       immediatelyRender: false,
       onUpdate: ({ editor }) => {
         if (!editor.isEmpty) {
-          console.log(editor.getJSON());
+          setContent(generateHTML(editor.getJSON(), ExtensionsKit()));
+          console.log(editor.getHTML());
         }
       },
     },
@@ -59,9 +70,7 @@ export const BlogEditor = () => {
               editor={editor}
               className="flex-1 overflow-y-auto"
             />
-            {/* <ContentItemMenu editor={editor} />
-              
-            */}
+
             <ColumnsMenu
               editor={editor}
               appendTo={menuContainerRef}
@@ -85,6 +94,7 @@ export const BlogEditor = () => {
           </div>
         </div>
       </Card>
+      <Button onClick={openNewWindow}>Preview</Button>
     </div>
   );
 };

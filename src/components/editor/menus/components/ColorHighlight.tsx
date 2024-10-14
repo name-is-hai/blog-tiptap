@@ -32,7 +32,7 @@ export const ColorHighlightComponent = ({
         className={cn(
           buttonVariants({ variant: 'ghost', size: 'icon' }),
           'size-[34px] p-2',
-          !disabled && 'opacity-50 cursor-not-allowed pointer-events-none'
+          disabled && 'opacity-50 cursor-not-allowed pointer-events-none'
         )}
         width="18px"
         height="18px"
@@ -74,13 +74,13 @@ export const ColorHighlightComponent = ({
         modelValue={selectedColor}
         onChange={onChange}
         highlight
-        disabled={!disabled}
+        disabled={disabled}
       >
         <svg
           className={cn(
             buttonVariants({ variant: 'ghost', size: 'icon' }),
             'w-3 h-[32px] rounded-l-none hover:bg-muted-foreground/20',
-            !disabled && 'opacity-50 cursor-not-allowed pointer-events-none'
+            disabled && 'opacity-50 cursor-not-allowed pointer-events-none'
           )}
           width="1em"
           height="1em"

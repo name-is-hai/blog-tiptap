@@ -63,10 +63,10 @@ export const ToggleBar = ({ editor }: { editor: Editor }) => {
       </Button>
       <Button
         size={'icon'}
-        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+        onClick={() => editor.chain().focus().setButton().run()}
         variant={editor.isActive('codeBlock') ? 'default' : 'ghost'}
       >
-        cb
+        Button
       </Button>
     </>
   );

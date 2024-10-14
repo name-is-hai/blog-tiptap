@@ -1,36 +1,40 @@
-.ProseMirror {
-  /* Placeholder Styles */
-  .is-empty::before {
-    @apply text-black/40 dark:text-white/40 float-left h-0 pointer-events-none w-full;
-  }
+/* Placeholder Styles */
+.ProseMirror .is-empty::before {
+  color: rgba(0, 0, 0, 0.4);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  width: 100%;
+}
 
-  &.ProseMirror-focused {
-    /* Slashmenu Placeholder */
-    > p.has-focus.is-empty::before {
-      content: 'Type  /  to browse options';
-    }
+.ProseMirror.ProseMirror-focused>p.has-focus.is-empty::before {
+  content: 'Type  /  to browse options';
+}
 
-    > [data-type='columns'] > [data-type='column'] > p.is-empty.has-focus::before {
-      content: 'Type  /  to browse options';
-    }
-  }
+.ProseMirror.ProseMirror-focused>[data-type='columns']>[data-type='column']>p.is-empty.has-focus::before {
+  content: 'Type  /  to browse options';
+}
 
-  /* Default Placeholder */
-  & > .is-editor-empty::before {
-    content: 'Click here to start writing …';
-  }
+/* Default Placeholder */
+.ProseMirror>.is-editor-empty::before {
+  content: 'Click here to start writing …';
+}
 
-  /* Blockquote Placeholder */
-  blockquote .is-empty:not(.is-editor-empty):first-child:last-child::before {
-    content: 'Enter a quote';
-  }
+/* Blockquote Placeholder */
+.ProseMirror blockquote .is-empty:not(.is-editor-empty):first-child:last-child::before {
+  content: 'Enter a quote';
+}
 
-  blockquote + figcaption.is-empty:not(.is-editor-empty)::before {
-    content: 'Author';
-  }
+.ProseMirror blockquote+figcaption.is-empty:not(.is-editor-empty)::before {
+  content: 'Author';
+}
 
-  [data-placeholder][data-suggestion]::before,
-  [data-placeholder][data-suggestion] *::before {
-    content: none !important;
-  }
+.ProseMirror [data-placeholder][data-suggestion]::before,
+.ProseMirror [data-placeholder][data-suggestion] *::before {
+  content: none !important;
+}
+
+/* Dark mode styles */
+.dark .ProseMirror .is-empty::before {
+  color: rgba(255, 255, 255, 0.4);
 }

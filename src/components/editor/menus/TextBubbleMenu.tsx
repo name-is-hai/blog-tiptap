@@ -29,7 +29,7 @@ import { ContentTypePicker } from './TextMenu/ContentTypePicker';
 import { EditLinkPopover } from './TextMenu/EditLinkPopover';
 import { FontSizePicker } from './TextMenu/FontSizePicker';
 import { ColorHighlightComponent } from './components/ColorHighlight';
-import { TextHighlight } from './components/TextHightlight';
+import { TextHighlight } from './components/TextHighlight';
 import { MenuProps } from './types';
 
 // We memorize the button so each button is not rerendered

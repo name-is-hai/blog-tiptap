@@ -1,84 +1,125 @@
-.ProseMirror {
   /* Image Block */
-  figure[data-type='imageBlock'] {
-    @apply m-0;
+  .ProseMirror figure[data-type='imageBlock'] {
+    margin: 0;
+  }
 
-    img {
-      @apply rounded block w-full;
-    }
+  .ProseMirror figure[data-type='imageBlock'] img {
+    border-radius: 0.25rem;
+    display: block;
+    width: 100%;
   }
 
   /* Block Quote */
-  figure[data-type='blockquoteFigure'] {
-    @apply my-14 text-black dark:text-white;
+  .ProseMirror figure[data-type='blockquoteFigure'] {
+    margin-top: 3.5rem;
+    margin-bottom: 3.5rem;
+    color: black;
   }
 
-  & > blockquote,
-  [data-type='blockquoteFigure'] {
-    blockquote {
-      @apply m-0;
+  .dark .ProseMirror figure[data-type='blockquoteFigure'] {
+    color: white;
+  }
 
-      & > * {
-        @apply first:mt-0 last:mb-0;
-      }
-    }
+  .ProseMirror>blockquote blockquote,
+  .ProseMirror [data-type='blockquoteFigure'] blockquote {
+    margin: 0;
+  }
+
+  .ProseMirror>blockquote blockquote>*:first-child,
+  .ProseMirror [data-type='blockquoteFigure'] blockquote>*:first-child {
+    margin-top: 0;
+  }
+
+  .ProseMirror>blockquote blockquote>*:last-child,
+  .ProseMirror [data-type='blockquoteFigure'] blockquote>*:last-child {
+    margin-bottom: 0;
   }
 
   /* Columns */
-  [data-type='columns'] {
-    @apply grid gap-4 mt-14 mb-12;
-
-    &.layout-sidebar-left {
-      grid-template-columns: 40fr 60fr;
-    }
-
-    &.layout-sidebar-right {
-      grid-template-columns: 60fr 40fr;
-    }
-
-    &.layout-two-column {
-      grid-template-columns: 1fr 1fr;
-    }
+  .ProseMirror [data-type='columns'] {
+    display: grid;
+    gap: 1rem;
+    margin-top: 3.5rem;
+    margin-bottom: 3rem;
   }
 
-  [data-type='column'] {
-    @apply overflow-auto;
+  .ProseMirror [data-type='columns'].layout-sidebar-left {
+    grid-template-columns: 40fr 60fr;
+  }
+
+  .ProseMirror [data-type='columns'].layout-sidebar-right {
+    grid-template-columns: 60fr 40fr;
+  }
+
+  .ProseMirror [data-type='columns'].layout-two-column {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ProseMirror [data-type='column'] {
+    overflow: auto;
   }
 
   /* Details */
-  [data-type='details'] {
-    @apply flex gap-1 my-6 mx-auto p-2 border border-gray-300 rounded;
-
-    summary {
-      @apply font-bold block;
-    }
-
-    > button {
-      @apply bg-transparent border-none cursor-pointer flex items-center justify-center rounded text-xs h-5 w-5;
-
-      &:hover {
-        @apply dark:bg-gray-800 bg-gray-300;
-      }
-
-      &::before {
-        content: '\25B6';
-      }
-    }
-
-    &.is-open > button::before {
-      @apply rotate-90;
-    }
-
-    > div {
-      @apply flex flex-col gap-4 w-full;
-
-      > [data-type='detailsContent'] > :last-child {
-        @apply mb-2;
-      }
-    }
-
-    [data-type='details'] {
-      @apply my-2 mx-0;
-    }
+  .ProseMirror [data-type='details'] {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
   }
-}
+
+  .ProseMirror [data-type='details'] summary {
+    font-weight: bold;
+    display: block;
+  }
+
+  .ProseMirror [data-type='details']>button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
+  .ProseMirror [data-type='details']>button:hover {
+    background-color: #d1d5db;
+  }
+
+  .dark .ProseMirror [data-type='details']>button:hover {
+    background-color: #1f2937;
+  }
+
+  .ProseMirror [data-type='details']>button::before {
+    content: '\25B6';
+  }
+
+  .ProseMirror [data-type='details'].is-open>button::before {
+    transform: rotate(90deg);
+  }
+
+  .ProseMirror [data-type='details']>div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .ProseMirror [data-type='details']>div>[data-type='detailsContent']> :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .ProseMirror [data-type='details'] [data-type='details'] {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0;
+    margin-right: 0;
+  }

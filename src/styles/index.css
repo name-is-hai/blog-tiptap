@@ -7,134 +7,238 @@
 @import './partials/typography.css';
 
 .ProseMirror {
-  @apply caret-black dark:caret-white outline-0 pr-8 pl-20 py-16 z-0 lg:pl-8 lg:pr-8;
-
-  &>* {
-    @apply mx-auto max-w-2xl;
-  }
-
-  .selection {
-    @apply inline;
-  }
-
-  .selection,
-  *::selection {
-    @apply bg-black/10 dark:bg-white/20;
-  }
-
-  &>.react-renderer {
-    @apply my-12 first:mt-0 last:mb-0;
-  }
-
-  &.resize-cursor {
-    @apply cursor-col-resize;
-  }
-
-  .ProseMirror-gapcursor {
-    @apply relative w-full max-w-2xl mx-auto;
-
-    &:after {
-      @apply border-t-black/40 dark:border-t-white/40 w-full -top-[1.5em] max-w-2xl mx-auto left-0 right-0;
-    }
-  }
-
-  .is-empty::before {
-    @apply text-neutral-500 dark:text-neutral-400;
-  }
-
-  &>*:first-child,
-  [data-type='column']>* {
-    @apply first:mt-0 last:mb-0;
-  }
-
-  &>*+* {
-    margin-top: 0.75em;
-  }
-
-  .node-imageUpload {
-    @apply rounded border-2 border-dotted border-black border-opacity-10 p-2 dark:border-neutral-500;
-    transition: border 160ms cubic-bezier(0.45, 0.05, 0.55, 0.95);
-
-    &:hover {
-      @apply border-opacity-30;
-    }
-
-    &:has(.is-active),
-    &.has-focus {
-      @apply border-opacity-40;
-    }
-  }
-
-  [data-type='columns'] {
-
-    &.has-focus [data-type='column'],
-    &:hover [data-type='column'] {
-      @apply border-neutral-300 dark:border-neutral-700;
-    }
-
-    [data-type='column'].has-focus {
-      @apply border-neutral-400 dark:border-neutral-600;
-    }
-  }
-
-  [data-type='column'] {
-    @apply rounded border-2 border-dotted border-transparent p-1;
-    transition: border 160ms cubic-bezier(0.45, 0.05, 0.55, 0.95);
-
-    &:hover {
-      @apply border-neutral-100 dark:border-neutral-900;
-    }
-
-    &:has(.is-active),
-    &.has-focus {
-      @apply border-neutral-100 dark:border-neutral-900;
-    }
-  }
-
-  .node-imageBlock {
-    & img {
-      @apply border-2 border-transparent rounded-xl overflow-hidden;
-    }
-
-    &:hover img {
-      @apply border-2 border-neutral-100 dark:border-neutral-900;
-    }
-
-    &:has(.is-active) img,
-    &.has-focus img {
-      @apply border-2 border-neutral-800 dark:border-neutral-200;
-    }
-  }
-
-  .node-aiWriter,
-  .node-aiImage,
-  .node-tableOfContentsNode {
-    &.has-focus [data-node-view-wrapper]>* {
-      @apply shadow-[0_0_0_2px] shadow-black/30 dark:shadow-white/30 transition-all rounded-lg;
-    }
-  }
-
-  .ProseMirror-gapcursor+.node-imageBlock,
-  .ProseMirror-gapcursor+.node-imageUpload {
-    @apply outline-neutral-700 hover:outline-neutral-600 dark:outline-neutral-300 dark:hover:outline-neutral-400;
-  }
-
-  /* [data-type='blockquoteFigure']>div {
-    @apply border-l-4 border-l-neutral-700 py-2 px-4 bg-opacity-80 rounded-lg rounded-tl-none rounded-bl-none;
-    @apply dark:border-l-neutral-300;
-  }
-
-  [data-type='blockquoteFigure']>blockquote {
-    @apply text-lg text-black;
-    @apply dark:text-white;
-  }
-*/
-  figcaption {
-    @apply text-sm text-neutral-500 mt-4 transition-all overflow-hidden;
-    @apply dark:text-neutral-400;
-  } 
+  caret-color: black;
+  outline: 0;
+  padding-right: 8px;
+  padding-left: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  z-index: 0;
 }
 
-[data-theme='slash-command'] {
+@media (min-width: 1024px) {
+  .ProseMirror {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+.ProseMirror>* {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 42rem;
+}
+
+.ProseMirror .selection {
+  display: inline;
+}
+
+.ProseMirror .selection,
+.ProseMirror *::selection {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.ProseMirror>.react-renderer {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.ProseMirror>.react-renderer:first-child {
+  margin-top: 0;
+}
+
+.ProseMirror>.react-renderer:last-child {
+  margin-bottom: 0;
+}
+
+.ProseMirror.resize-cursor {
+  cursor: col-resize;
+}
+
+.ProseMirror .ProseMirror-gapcursor {
+  position: relative;
+  width: 100%;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ProseMirror .ProseMirror-gapcursor:after {
+  border-top-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  top: -1.5em;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+.ProseMirror .is-empty::before {
+  color: #737373;
+}
+
+.ProseMirror>*:first-child,
+.ProseMirror [data-type='column']>* {
+  margin-top: 0;
+}
+
+.ProseMirror>*:last-child,
+.ProseMirror [data-type='column']>* {
+  margin-bottom: 0;
+}
+
+.ProseMirror>*+* {
+  margin-top: 0.75em;
+}
+
+.ProseMirror .node-imageUpload {
+  border-radius: 0.25rem;
+  border: 2px dotted rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  transition: border 160ms cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+.ProseMirror .node-imageUpload:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.ProseMirror .node-imageUpload:has(.is-active),
+.ProseMirror .node-imageUpload.has-focus {
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+.ProseMirror [data-type='columns']:hover [data-type='column'],
+.ProseMirror [data-type='columns'].has-focus [data-type='column'] {
+  border-color: #d4d4d4;
+}
+
+.ProseMirror [data-type='columns'] [data-type='column'].has-focus {
+  border-color: #a3a3a3;
+}
+
+.ProseMirror [data-type='column'] {
+  border-radius: 0.25rem;
+  border: 2px dotted transparent;
+  padding: 0.25rem;
+  transition: border 160ms cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+.ProseMirror [data-type='column']:hover {
+  border-color: #f5f5f5;
+}
+
+.ProseMirror [data-type='column']:has(.is-active),
+.ProseMirror [data-type='column'].has-focus {
+  border-color: #f5f5f5;
+}
+
+.ProseMirror .node-imageBlock img {
+  border: 2px solid transparent;
+  /* border-radius: 0.75rem; */
+  overflow: hidden;
+}
+
+.ProseMirror .node-imageBlock:hover img {
+  border: 2px solid #f5f5f5;
+}
+
+.ProseMirror .node-imageBlock:has(.is-active) img,
+.ProseMirror .node-imageBlock.has-focus img {
+  border: 2px solid #262626;
+}
+
+.ProseMirror .node-aiWriter.has-focus [data-node-view-wrapper]>*,
+.ProseMirror .node-aiImage.has-focus [data-node-view-wrapper]>*,
+.ProseMirror .node-tableOfContentsNode.has-focus [data-node-view-wrapper]>* {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
+  transition: all;
+  border-radius: 0.5rem;
+}
+
+.ProseMirror .ProseMirror-gapcursor+.node-imageBlock,
+.ProseMirror .ProseMirror-gapcursor+.node-imageUpload {
+  outline-color: #404040;
+}
+
+.ProseMirror .ProseMirror-gapcursor+.node-imageBlock:hover,
+.ProseMirror .ProseMirror-gapcursor+.node-imageUpload:hover {
+  outline-color: #525252;
+}
+
+.ProseMirror figcaption {
+  font-size: 0.875rem;
+  color: #737373;
+  margin-top: 1rem;
+  transition: all;
+  overflow: hidden;
+}
+
+.ProseMirror [data-theme='slash-command'] {
   width: 1000vw;
+}
+
+.dark .ProseMirror {
+  caret-color: white;
+}
+
+.dark .ProseMirror .selection,
+.dark .ProseMirror *::selection {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark .ProseMirror .ProseMirror-gapcursor:after {
+  border-top-color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .ProseMirror .is-empty::before {
+  color: #a3a3a3;
+}
+
+.dark .ProseMirror .node-imageUpload {
+  border-color: #737373;
+}
+
+.dark .ProseMirror [data-type='columns']:hover [data-type='column'],
+.dark .ProseMirror [data-type='columns'].has-focus [data-type='column'] {
+  border-color: #404040;
+}
+
+.dark .ProseMirror [data-type='columns'] [data-type='column'].has-focus {
+  border-color: #525252;
+}
+
+.dark .ProseMirror [data-type='column']:hover,
+.dark .ProseMirror [data-type='column']:has(.is-active),
+.dark .ProseMirror [data-type='column'].has-focus {
+  border-color: #171717;
+}
+
+.dark .ProseMirror .node-imageBlock:hover img {
+  border-color: #171717;
+}
+
+.dark .ProseMirror .node-imageBlock:has(.is-active) img,
+.dark .ProseMirror .node-imageBlock.has-focus img {
+  border-color: #e5e5e5;
+}
+
+.dark .ProseMirror .node-aiWriter.has-focus [data-node-view-wrapper]>*,
+.dark .ProseMirror .node-aiImage.has-focus [data-node-view-wrapper]>*,
+.dark .ProseMirror .node-tableOfContentsNode.has-focus [data-node-view-wrapper]>* {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+.dark .ProseMirror .ProseMirror-gapcursor+.node-imageBlock,
+.dark .ProseMirror .ProseMirror-gapcursor+.node-imageUpload {
+  outline-color: #d4d4d4;
+}
+
+.dark .ProseMirror .ProseMirror-gapcursor+.node-imageBlock:hover,
+.dark .ProseMirror .ProseMirror-gapcursor+.node-imageUpload:hover {
+  outline-color: #a3a3a3;
+}
+
+.dark .ProseMirror figcaption {
+  color: #a3a3a3;
 }

@@ -15,8 +15,8 @@ import {
 } from 'lucide-react';
 import { useCallback } from 'react';
 import { sticky } from 'tippy.js';
+import Table from '../extensions/Table/table';
 import { ColorHighlightComponent } from './components/ColorHighlight';
-import Table from '../extensions/Table/Table';
 
 export const TableBubbleMenu = ({ editor, appendTo }: MenuProps) => {
   const shouldShow = useCallback(
@@ -182,7 +182,7 @@ export const TableBubbleMenu = ({ editor, appendTo }: MenuProps) => {
             if (typeof color === 'undefined')
               editor.chain().focus().unsetTableCellBackground().run();
           }}
-          disabled={!editor?.can().setHighlight()}
+          disabled={editor?.can().setHighlight()}
         />
         <Trash2
           onClick={onDeleteTable}

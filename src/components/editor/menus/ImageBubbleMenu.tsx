@@ -106,7 +106,7 @@ export const ImageBubbleMenu = ({ editor, appendTo }: MenuProps) => {
                 onClick={onAlignImageLeft}
                 variant={
                   editor.isActive('imageBlock', { align: 'left' })
-                    ? 'default'
+                    ? 'secondary'
                     : 'ghost'
                 }
               >
@@ -122,7 +122,7 @@ export const ImageBubbleMenu = ({ editor, appendTo }: MenuProps) => {
                 onClick={onAlignImageCenter}
                 variant={
                   editor.isActive('imageBlock', { align: 'center' })
-                    ? 'default'
+                    ? 'secondary'
                     : 'ghost'
                 }
               >
@@ -138,7 +138,7 @@ export const ImageBubbleMenu = ({ editor, appendTo }: MenuProps) => {
                 onClick={onAlignImageRight}
                 variant={
                   editor.isActive('imageBlock', { align: 'right' })
-                    ? 'default'
+                    ? 'secondary'
                     : 'ghost'
                 }
               >

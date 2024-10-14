@@ -1,3 +1,4 @@
+import { ButtonExtension } from '@/components/editor/extensions/Button/button';
 import HorizontalRule from '@/components/editor/extensions/horizontal-rule';
 import ImageBlock from '@/components/editor/extensions/image-block';
 import Link from '@/components/editor/extensions/link';
@@ -95,6 +96,7 @@ export const isCustomNodeSelected = (editor: Editor, node: HTMLElement) => {
     CodeBlock.name,
     ImageBlock.name,
     Link.name,
+    ButtonExtension.name,
   ];
 
   return (

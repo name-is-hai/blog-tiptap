@@ -68,10 +68,19 @@ export const ImageBlock = Image.extend({
     ];
   },
 
-  renderHTML({ HTMLAttributes }) {
+  renderHTML({ HTMLAttributes, node }) {
     return [
-      'img',
-      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+      'div',
+      {
+        style: `width: ${node.attrs.width || '100%'}; 
+        margin-left: ${node.attrs.align === 'left' ? '0' : 'auto'};
+        margin-right: ${node.attrs.align === 'right' ? '0' : 'auto'};`,
+      },
+      [
+        'div',
+        { contenteditable: 'false' },
+        ['img', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)],
+      ],
     ];
   },
 
