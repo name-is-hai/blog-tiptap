@@ -1,6 +1,4 @@
-import {
-  useLinkEditorState
-} from '@/components/editor/menus/components/LinkEditorPanel';
+import { useLinkEditorState } from '@/components/editor/menus/components/LinkEditorPanel';
 import { Button } from '@/components/ui/button';
 import {
   Popover,
@@ -29,7 +27,10 @@ export const EditLinkPopover = ({ onSetLink }: EditLinkPopoverProps) => {
         <Popover>
           <TooltipTrigger asChild>
             <PopoverTrigger asChild>
-              <Button size={"icon"} variant={'ghost'}>
+              <Button
+                size={'icon'}
+                variant={'ghost'}
+              >
                 <Link className="size-4" />
               </Button>
             </PopoverTrigger>

@@ -9,7 +9,8 @@ import {
   SquareCode,
   Table,
   Minus,
-  Columns2,
+  Image,
+  MousePointer,
 } from 'lucide-react';
 import { Group } from './types';
 
@@ -72,16 +73,6 @@ export const GROUPS: Group[] = [
           editor.chain().focus().toggleTaskList().run();
         },
       },
-      // {
-      //   name: 'toggleList',
-      //   label: 'Toggle List',
-      //   iconName: 'ListCollapse',
-      //   description: 'Toggles can show and hide content',
-      //   aliases: ['toggle'],
-      //   action: (editor) => {
-      //     editor.chain().focus().setDetails().run();
-      //   },
-      // },
       {
         name: 'blockquote',
         label: 'Blockquote',
@@ -119,32 +110,26 @@ export const GROUPS: Group[] = [
             .run();
         },
       },
-      // {
-      //   name: 'image',
-      //   label: 'Image',
-      //   iconName: 'Image',
-      //   description: 'Insert an image',
-      //   aliases: ['img'],
-      //   action: (editor) => {
-      //     editor.chain().focus().setImageUpload().run();
-      //   },
-      // },
       {
-        name: 'columns',
-        label: 'Columns',
-        icon: Columns2,
-        aliases: ['cols'],
-        shouldBeHidden: (editor) => editor.isActive('columns'),
+        name: 'image',
+        label: 'Image',
+        icon: Image,
+        aliases: ['img'],
         action: (editor) => {
-          editor
-            .chain()
-            .focus()
-            .setColumns()
-            .focus(editor.state.selection.head - 1)
-            .run();
+          editor.chain().focus().setImageUpload().run();
         },
       },
-      { 
+      {
+        name: 'button',
+        label: 'Button',
+        icon: MousePointer,
+        aliases: ['button'],
+        shouldBeHidden: (editor) => editor.isActive('button'),
+        action: (editor) => {
+          editor.chain().focus().setButton().run();
+        },
+      },
+      {
         name: 'horizontalRule',
         label: 'Horizontal Rule',
         icon: Minus,

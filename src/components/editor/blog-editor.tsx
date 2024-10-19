@@ -1,10 +1,11 @@
 'use client';
 
-import '@/styles/index.css';
 import { initialContent } from '@/lib/data/initialContent';
+import { tiptapHtml } from '@/lib/tiptap-html';
+import '@/styles/index.css';
 import { EditorContent, generateHTML, useEditor } from '@tiptap/react';
 import { useRef, useState } from 'react';
-import { Card } from '../ui/card';
+import { Button } from '../ui/button';
 import { ExtensionsKit } from './extentions-kit';
 import ColumnsMenu from './menus/ColumnsMenu';
 import { ImageBubbleMenu } from './menus/ImageBubbleMenu';
@@ -12,8 +13,7 @@ import { LinkBubbleMenu } from './menus/LinkBubbleMenu';
 import TableBubbleMenu from './menus/TableBubbleMenu';
 import { TextBubbleMenu } from './menus/TextBubbleMenu';
 import { ToggleBar } from './toggle-bar';
-import { Button } from '../ui/button';
-import { tiptapHtml } from '@/lib/tiptap-html';
+import { Card } from '../ui/card';
 
 export const BlogEditor = () => {
   const [content, setContent] = useState('');
@@ -60,40 +60,38 @@ export const BlogEditor = () => {
   return (
     <div>
       <ToggleBar editor={editor} />
-      <Card>
-        <div
-          className="flex h-full"
-          ref={menuContainerRef}
-        >
-          <div className="relative flex flex-col flex-1 h-full overflow-hidden">
-            <EditorContent
-              editor={editor}
-              className="flex-1 overflow-y-auto"
-            />
+      <div
+        className="flex h-full"
+        ref={menuContainerRef}
+      >
+        <div className="relative flex flex-col flex-1 h-full overflow-hidden">
+          <EditorContent
+            editor={editor}
+            className="flex-1 overflow-y-auto"
+          />
 
-            <ColumnsMenu
-              editor={editor}
-              appendTo={menuContainerRef}
-            />
-            <TextBubbleMenu
-              editor={editor}
-              appendTo={menuContainerRef}
-            />
-            <LinkBubbleMenu
-              editor={editor}
-              appendTo={menuContainerRef}
-            />
-            <TableBubbleMenu
-              editor={editor}
-              appendTo={menuContainerRef}
-            />
-            <ImageBubbleMenu
-              editor={editor}
-              appendTo={menuContainerRef}
-            />
-          </div>
+          <ColumnsMenu
+            editor={editor}
+            appendTo={menuContainerRef}
+          />
+          <TextBubbleMenu
+            editor={editor}
+            appendTo={menuContainerRef}
+          />
+          <LinkBubbleMenu
+            editor={editor}
+            appendTo={menuContainerRef}
+          />
+          <TableBubbleMenu
+            editor={editor}
+            appendTo={menuContainerRef}
+          />
+          <ImageBubbleMenu
+            editor={editor}
+            appendTo={menuContainerRef}
+          />
         </div>
-      </Card>
+      </div>
       <Button onClick={openNewWindow}>Preview</Button>
     </div>
   );

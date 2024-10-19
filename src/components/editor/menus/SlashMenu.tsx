@@ -1,12 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import {
-  Command,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { Button } from '@/components/ui/button';
 import { CommandTool, MenuListProps } from '../extensions/SlashCommand/types';
 
 export const SlashMenu = React.forwardRef((props: MenuListProps, ref) => {
@@ -103,42 +97,74 @@ export const SlashMenu = React.forwardRef((props: MenuListProps, ref) => {
   }
 
   return (
-    <Command
+    <div
       ref={scrollContainer}
-      loop
+      className="text-black max-h-[min(80vh,24rem)] overflow-auto flex-wrap mb-8 p-2 rounded-md bg-popover text-popover-foreground border shadow-md"
+      style={{
+        position: 'relative',
+        scrollbarWidth: 'thin',
+        scrollbarColor: 'rgba(156, 163, 175, 0.6) transparent',
+      }}
     >
-      <CommandList>
-        <ScrollArea className="h-[300px]">
-          {props.items.map((group, groupIndex) => {
-            return (
-              <CommandGroup
-                key={`${group.name}-wrapper`}
-                heading={group.title}
-              >
-                {group.commands.map(
-                  (command: CommandTool, commandIndex: number) => {
-                    return (
-                      <CommandItem
-                        key={commandIndex}
-                        onSelect={createCommandClickHandler(
-                          groupIndex,
-                          commandIndex
-                        )}
-                      >
-                        {command.icon && (
-                          <command.icon className="mr-2 h-4 w-4" />
-                        )}
-                        <span>{command.label}</span>
-                      </CommandItem>
-                    );
+      <style>
+        {`
+        div::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        div::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        div::-webkit-scrollbar-thumb {
+          background-color: rgba(156, 163, 175, 0.6);
+          border-radius: 9999px;
+          border: 2px solid transparent;
+          transition: background-color 0.2s ease;
+        }
+
+        div::-webkit-scrollbar-thumb:hover {
+          background-color: rgba(107, 114, 128, 0.8);
+        }
+    `}
+      </style>
+      <div className="grid grid-cols-1 gap-0.5">
+        {props.items.map((group, groupIndex: number) => (
+          <React.Fragment key={`${group.title}-wrapper`}>
+            <div
+              className="text-neutral-500 text-[0.65rem] col-[1/-1] mx-2 mt-4 font-semibold tracking-wider select-none uppercase first:mt-0.5"
+              key={`${group.title}`}
+            >
+              {group.title}
+            </div>
+            {group.commands.map(
+              (command: CommandTool, commandIndex: number) => (
+                <Button
+                  key={`${command.label}`}
+                  ref={
+                    selectedGroupIndex === groupIndex &&
+                    selectedCommandIndex === commandIndex
+                      ? activeItem
+                      : null
                   }
-                )}
-              </CommandGroup>
-            );
-          })}
-        </ScrollArea>
-      </CommandList>
-    </Command>
+                  variant={
+                    selectedGroupIndex === groupIndex &&
+                    selectedCommandIndex === commandIndex
+                      ? 'secondary'
+                      : 'ghost'
+                  }
+                  onClick={createCommandClickHandler(groupIndex, commandIndex)}
+                  className="flex flex-row items-center justify-start gap-2 px-2 py-1.5 text-sm"
+                >
+                  {command.icon && <command.icon className="mr-2 h-4 w-4" />}
+                  <span>{command.label}</span>
+                </Button>
+              )
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
   );
 });
 

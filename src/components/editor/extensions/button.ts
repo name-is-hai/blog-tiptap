@@ -1,16 +1,7 @@
-import { mergeAttributes, Node } from '@tiptap/core';
-import { NodeViewProps, ReactNodeViewRenderer } from '@tiptap/react';
-import { ButtonComponent } from './ButtonComponents';
-
-export const allowedButtonVariant = ['filled', 'outline'] as const;
-export type AllowedButtonVariant = (typeof allowedButtonVariant)[number];
-
-export const allowedButtonBorderRadius = ['sharp', 'smooth', 'round'] as const;
-export type AllowedButtonBorderRadius =
-  (typeof allowedButtonBorderRadius)[number];
-
-export const allowedLogoAlignment = ['left', 'center', 'right'] as const;
-export type AllowedLogoAlignment = (typeof allowedLogoAlignment)[number];
+import { DEFAULT_BUTTON_SIZE_VALUE, SIZE_STYLES } from '@/lib/constants';
+import { Node, mergeAttributes } from '@tiptap/core';
+import { ReactNodeViewRenderer } from '@tiptap/react';
+import { ButtonComponent } from '../components/ButtonComponents';
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
@@ -20,7 +11,7 @@ declare module '@tiptap/core' {
   }
 }
 
-export const ButtonExtension = Node.create({
+const ButtonExtension = Node.create({
   name: 'button',
   group: 'block',
   atom: true,
@@ -52,6 +43,9 @@ export const ButtonExtension = Node.create({
       textColor: {
         default: 'rgb(255, 255, 255)',
       },
+      size: {
+        default: DEFAULT_BUTTON_SIZE_VALUE,
+      },
     };
   },
 
@@ -71,29 +65,13 @@ export const ButtonExtension = Node.create({
       buttonColor,
       textColor,
       alignment,
+      size,
     } = node.attrs;
+    const { padding, fontSize } =
+      SIZE_STYLES[size as keyof typeof SIZE_STYLES] || SIZE_STYLES['md'];
 
-    const buttonStyle = `
-    background-color: ${variant === 'filled' ? buttonColor : 'transparent'};
-    color: ${textColor};
-    border-width: 2px;
-    border-style: solid;
-    border-color: ${buttonColor};
-    padding: 0.75rem 1.5rem;
-    font-weight: 600;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.875rem;
-    ${_radius === 'round' ? 'border-radius: 9999px;' : ''}
-    ${_radius === 'smooth' ? 'border-radius: 0.375rem;' : ''}
-    ${_radius === 'sharp' ? 'border-radius: 0;' : ''}
-  `;
-
-    const divStyle = `
-    text-align: ${alignment};
-    width: 100%;
-  `;
+    const buttonStyle = `background-color: ${variant === 'filled' ? buttonColor : 'transparent'}; color: ${textColor}; border-width: 2px; border-style: solid; border-color: ${buttonColor}; padding: ${padding}; font-size: ${fontSize}; font-weight: 600; display: inline-flex; justify-content: center; align-items: center; ${_radius === 'round' ? 'border-radius: 9999px;' : ''} ${_radius === 'smooth' ? 'border-radius: 0.375rem;' : ''} ${_radius === 'sharp' ? 'border-radius: 0;' : ''}`;
+    const divStyle = `text-align: ${alignment};width: 100%;`;
 
     return [
       'div',
@@ -113,7 +91,6 @@ export const ButtonExtension = Node.create({
       ],
     ];
   },
-
   addCommands() {
     return {
       setButton:
@@ -133,3 +110,5 @@ export const ButtonExtension = Node.create({
     return ReactNodeViewRenderer(ButtonComponent);
   },
 });
+
+export default ButtonExtension;

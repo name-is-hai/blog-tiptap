@@ -1,6 +1,7 @@
-import { ButtonExtension } from '@/components/editor/extensions/Button/button';
+import ButtonExtension from '@/components/editor/extensions/button';
 import HorizontalRule from '@/components/editor/extensions/horizontal-rule';
 import ImageBlock from '@/components/editor/extensions/image-block';
+import ImageUpload from '@/components/editor/extensions/image-upload';
 import Link from '@/components/editor/extensions/link';
 import { CodeBlock } from '@tiptap/extension-code-block';
 import { Editor, isTextSelection } from '@tiptap/react';
@@ -92,7 +93,7 @@ export const isCustomNodeSelected = (editor: Editor, node: HTMLElement) => {
   const customNodes = [
     HorizontalRule.name,
     ImageBlock.name,
-    // ImageUpload.name,
+    ImageUpload.name,
     CodeBlock.name,
     ImageBlock.name,
     Link.name,

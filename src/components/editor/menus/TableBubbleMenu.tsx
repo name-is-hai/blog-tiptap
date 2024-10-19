@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { useCallback } from 'react';
 import { sticky } from 'tippy.js';
-import Table from '../extensions/Table/table';
+import Table from '../extensions/table';
 import { ColorHighlightComponent } from './components/ColorHighlight';
 
 export const TableBubbleMenu = ({ editor, appendTo }: MenuProps) => {

@@ -3,9 +3,9 @@ import { ReactRenderer } from '@tiptap/react';
 import { SuggestionKeyDownProps, SuggestionProps } from '@tiptap/suggestion';
 import tippy from 'tippy.js';
 
-import EmojiList from './components/EmojiList';
-import { EmojiListProps } from './types';
 import { RefAttributes } from 'react';
+import EmojiList from '../../components/EmojiList';
+import { EmojiListProps } from './types';
 
 export const emojiSuggestion = {
   items: ({ editor, query }: { editor: Editor; query: string }) =>
@@ -36,7 +36,9 @@ export const emojiSuggestion = {
         }) as ReactRenderer<
           { onKeyDown: (evt: SuggestionKeyDownProps) => boolean },
           EmojiListProps &
-            RefAttributes<{ onKeyDown: (evt: SuggestionKeyDownProps) => boolean }>
+            RefAttributes<{
+              onKeyDown: (evt: SuggestionKeyDownProps) => boolean;
+            }>
         >;
 
         popup = tippy('body', {

@@ -8,7 +8,7 @@ import React, {
   useImperativeHandle,
   useState,
 } from 'react';
-import { EmojiListProps } from '../types';
+import { EmojiListProps } from '../extensions/Emoji/types';
 
 const EmojiList = forwardRef((props: EmojiListProps, ref) => {
   const [selectedIndex, setSelectedIndex] = useState(0);

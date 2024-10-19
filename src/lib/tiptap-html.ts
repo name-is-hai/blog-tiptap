@@ -1,48 +1,26 @@
 export const tiptapHtml = (content: string) =>
   `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html
-  dir="ltr"
-  lang="vi"
->
+<html dir="ltr" lang="vi">
   <head>
     <meta
-      content="width=device-width"
-      name="viewport"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="https://upload.wikimedia.org/wikipedia/commons/6/68/Logo_FPT_Education.png"
-    />
+      content="width=device-width" name="viewport"/>
     <meta
-      content="text/html; charset=UTF-8"
-      http-equiv="Content-Type"
+      content="text/html; charset=UTF-8" http-equiv="Content-Type"
     />
-    <meta
-      content="IE=edge"
-      http-equiv="X-UA-Compatible"
-    />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta name="x-apple-disable-message-reformatting" />
+    <meta content="telephone=no,address=no,email=no,date=no,url=no" name="format-detection" />
     <meta
-      content="telephone=no,address=no,email=no,date=no,url=no"
-      name="format-detection"
-    />
-    <meta
-      content="light"
-      name="color-scheme"
-    />
-    <meta
-      content="light"
-      name="supported-color-schemes"
-    />
+      content="light" name="color-scheme" />
+    <meta content="light" name="supported-color-schemes" />
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
     </style>
     <style>
       * {
-       font-family: "Inter", sans-serif;
-       font-optical-sizing: auto;
-       font-style: normal;
+        font-family: 'Inter', sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
       }
     </style>
     <style>
@@ -53,7 +31,7 @@ export const tiptapHtml = (content: string) =>
       .ProseMirror a {
         text-decoration: none;
       }
-      
+
       .ProseMirror {
         word-wrap: break-word;
         white-space: pre-wrap;
@@ -63,105 +41,27 @@ export const tiptapHtml = (content: string) =>
         font-feature-settings: 'liga' 0; /* the above doesn't seem to work in Edge */
       }
 
-      .ProseMirror [contenteditable='false'] {
-        white-space: normal;
-      }
-
-      .ProseMirror [contenteditable='false'] [contenteditable='true'] {
-        white-space: pre-wrap;
-      }
-
-      .ProseMirror pre {
-        white-space: pre-wrap;
-      }
-
-      img.ProseMirror-separator {
-        display: inline !important;
-        border: none !important;
-        margin: 0 !important;
-        width: 0 !important;
-        height: 0 !important;
-      }
-
-      .ProseMirror-gapcursor {
-        display: none;
-        pointer-events: none;
-        position: absolute;
-        margin: 0;
-      }
-
-      .ProseMirror-gapcursor:after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: -2px;
-        width: 20px;
-        border-top: 1px solid black;
-        animation: ProseMirror-cursor-blink 1.1s steps(2, start) infinite;
-      }
-
-      @keyframes ProseMirror-cursor-blink {
-        to {
-          visibility: hidden;
-        }
-      }
-
-      .ProseMirror-hideselection *::selection {
-        background: transparent;
-      }
-
-      .ProseMirror-hideselection *::-moz-selection {
-        background: transparent;
-      }
-
-      .ProseMirror-hideselection * {
-        caret-color: transparent;
-      }
-
-      .ProseMirror-focused .ProseMirror-gapcursor {
-        display: block;
-      }
-
-      .tippy-box[data-animation='fade'][data-state='hidden'] {
-        opacity: 0;
-      }
-
       .ProseMirror {
-        caret-color: black;
-        outline: 0;
-        padding-right: 8px;
-        padding-left: 20px;
-        padding-top: 16px;
-        padding-bottom: 16px;
+        caret-color: #000;
+        outline-width: 0px;
+        padding-right: 2rem;
+        padding-left: 5rem;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+        margin-left: auto;
+        margin-right: auto;
         z-index: 0;
-        max-width: 600px;
-        min-width: 300px;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 0.5rem;
-      }
-
-      @media (min-width: 1024px) {
-        .ProseMirror {
-          padding-left: 8px;
-          padding-right: 8px;
-        }
-      }
-
-      .ProseMirror > * {
-        margin-left: auto;
-        margin-right: auto;
         max-width: 42rem;
       }
 
       .ProseMirror .selection {
-        display: inline;
+        display: inline-block;
       }
 
       .ProseMirror .selection,
       .ProseMirror *::selection {
         background-color: rgba(0, 0, 0, 0.1);
+        display: inline-block;
       }
 
       .ProseMirror > .react-renderer {
@@ -184,7 +84,7 @@ export const tiptapHtml = (content: string) =>
       .ProseMirror .ProseMirror-gapcursor {
         position: relative;
         width: 100%;
-        max-width: 42rem;
+        max-width: 50rem;
         margin-left: auto;
         margin-right: auto;
       }
@@ -200,111 +100,28 @@ export const tiptapHtml = (content: string) =>
         right: 0;
       }
 
-      .ProseMirror .is-empty::before {
-        color: #737373;
-      }
-
-      .ProseMirror > *:first-child,
-      .ProseMirror [data-type='column'] > * {
-        margin-top: 0;
-      }
-
-      .ProseMirror > *:last-child,
-      .ProseMirror [data-type='column'] > * {
-        margin-bottom: 0;
-      }
-
-      .ProseMirror > * + * {
-        margin-top: 0.75em;
-      }
-
-      .ProseMirror .node-imageUpload {
-        border-radius: 0.25rem;
-        border: 2px dotted rgba(0, 0, 0, 0.1);
-        padding: 0.5rem;
-        transition: border 160ms cubic-bezier(0.45, 0.05, 0.55, 0.95);
-      }
-
-      .ProseMirror .node-imageUpload:hover {
-        border-color: rgba(0, 0, 0, 0.3);
-      }
-
-      .ProseMirror .node-imageUpload:has(.is-active),
-      .ProseMirror .node-imageUpload.has-focus {
-        border-color: rgba(0, 0, 0, 0.4);
-      }
-
-      .ProseMirror [data-type='columns']:hover [data-type='column'],
-      .ProseMirror [data-type='columns'].has-focus [data-type='column'] {
-        border-color: #d4d4d4;
-      }
-
-      .ProseMirror [data-type='columns'] [data-type='column'].has-focus {
-        border-color: #a3a3a3;
-      }
-
-      .ProseMirror [data-type='column'] {
-        border-radius: 0.25rem;
-        border: 2px dotted transparent;
-        padding: 0.25rem;
-        transition: border 160ms cubic-bezier(0.45, 0.05, 0.55, 0.95);
-      }
-
-      .ProseMirror [data-type='column']:hover {
-        border-color: #f5f5f5;
-      }
-
-      .ProseMirror [data-type='column']:has(.is-active),
-      .ProseMirror [data-type='column'].has-focus {
-        border-color: #f5f5f5;
-      }
-
-      .ProseMirror .node-imageBlock img {
-        border: 2px solid transparent;
-        /* border-radius: 0.75rem; */
-        overflow: hidden;
-      }
-
-      .ProseMirror .node-imageBlock:hover img {
-        border: 2px solid #f5f5f5;
-      }
-
-      .ProseMirror .node-imageBlock:has(.is-active) img,
-      .ProseMirror .node-imageBlock.has-focus img {
-        border: 2px solid #262626;
-      }
-
-      .ProseMirror .node-aiWriter.has-focus [data-node-view-wrapper] > *,
-      .ProseMirror .node-aiImage.has-focus [data-node-view-wrapper] > *,
-      .ProseMirror
-        .node-tableOfContentsNode.has-focus
-        [data-node-view-wrapper]
-        > * {
-        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
-        transition: all;
-        border-radius: 0.5rem;
-      }
-
-      .ProseMirror .ProseMirror-gapcursor + .node-imageBlock,
-      .ProseMirror .ProseMirror-gapcursor + .node-imageUpload {
-        outline-color: #404040;
-      }
-
-      .ProseMirror .ProseMirror-gapcursor + .node-imageBlock:hover,
-      .ProseMirror .ProseMirror-gapcursor + .node-imageUpload:hover {
-        outline-color: #525252;
-      }
-
-      .ProseMirror figcaption {
-        font-size: 0.875rem;
-        color: #737373;
-        margin-top: 1rem;
-        transition: all;
-        overflow: hidden;
-      }
-
       .ProseMirror [data-theme='slash-command'] {
         width: 1000vw;
+      }
+
+      @media (min-width: 1024px) {
+        .ProseMirror {
+          padding-left: 8px;
+          padding-right: 8px;
+        }
+      }
+
+      .dark .ProseMirror {
+        caret-color: white;
+      }
+
+      .dark .ProseMirror .selection,
+      .dark .ProseMirror *::selection {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .dark .ProseMirror .ProseMirror-gapcursor:after {
+        border-top-color: rgba(255, 255, 255, 0.4);
       }
 
       .ProseMirror p {
@@ -457,6 +274,32 @@ export const tiptapHtml = (content: string) =>
         background-color: rgba(0, 0, 0, 0.8);
       }
 
+      .dark .ProseMirror mark {
+        background-color: #f87171;
+      }
+
+      .dark .ProseMirror [data-type='horizontalRule'].ProseMirror-selectednode {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .dark
+        .ProseMirror
+        [data-type='horizontalRule'].ProseMirror-selectednode
+        hr {
+        border-top-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .dark
+        .ProseMirror
+        [data-type='horizontalRule']:hover:not(.ProseMirror-selectednode) {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .dark .ProseMirror [data-type='horizontalRule'] hr {
+        border-top-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+
       .ProseMirror .tableWrapper {
         margin-top: 3rem;
         margin-bottom: 3rem;
@@ -522,47 +365,71 @@ export const tiptapHtml = (content: string) =>
         border: 1px double rgba(0, 0, 0, 0.2);
       }
 
-      /* Placeholder Styles */
-      .ProseMirror .is-empty::before {
-        color: rgba(0, 0, 0, 0.4);
-        float: left;
-        height: 0;
-        pointer-events: none;
-        width: 100%;
+      .dark .ProseMirror table {
+        border-color: rgba(255, 255, 255, 0.2);
       }
 
-      .ProseMirror.ProseMirror-focused > p.has-focus.is-empty::before {
-        content: 'Type  /  to browse options';
+      .dark .ProseMirror table td,
+      .dark .ProseMirror table th {
+        border-color: rgba(255, 255, 255, 0.2);
       }
 
-      .ProseMirror.ProseMirror-focused
-        > [data-type='columns']
-        > [data-type='column']
-        > p.is-empty.has-focus::before {
-        content: 'Type  /  to browse options';
+      .dark .ProseMirror table .column-resize-handle::before {
+        background-color: rgba(255, 255, 255, 0.2);
       }
 
-      /* Default Placeholder */
-      .ProseMirror > .is-editor-empty::before {
-        content: 'Click here to start writing …';
+      .dark .ProseMirror table .selectedCell {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
       }
 
-      /* Blockquote Placeholder */
-      .ProseMirror
-        blockquote
-        .is-empty:not(.is-editor-empty):first-child:last-child::before {
-        content: 'Enter a quote';
+      .dark .ProseMirror table .grip-column,
+      .dark .ProseMirror table .grip-row {
+        background-color: rgba(255, 255, 255, 0.1);
       }
 
-      .ProseMirror
-        blockquote
-        + figcaption.is-empty:not(.is-editor-empty)::before {
-        content: 'Author';
+      .dark .ProseMirror table .grip-column {
+        border-color: rgba(255, 255, 255, 0.2);
       }
 
-      .ProseMirror [data-placeholder][data-suggestion]::before,
-      .ProseMirror [data-placeholder][data-suggestion] *::before {
-        content: none !important;
+      .dark .ProseMirror table .grip-column:hover,
+      .dark .ProseMirror table .grip-column.selected {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .dark .ProseMirror table .grip-column:hover::before {
+        border-bottom-color: rgba(255, 255, 255, 0.6);
+      }
+
+      .dark .ProseMirror table .grip-column.selected {
+        background-color: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .dark .ProseMirror table .grip-column.selected::before {
+        border-bottom-color: #fff;
+      }
+
+      .dark .ProseMirror table .grip-row {
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .dark .ProseMirror table .grip-row:hover,
+      .dark .ProseMirror table .grip-row.selected {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .dark .ProseMirror table .grip-row:hover::before {
+        border-left-color: rgba(255, 255, 255, 0.6);
+      }
+
+      .dark .ProseMirror table .grip-row.selected {
+        background-color: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .dark .ProseMirror table .grip-row.selected::before {
+        border-left-color: #fff;
       }
 
       .ProseMirror ol {
@@ -735,36 +602,31 @@ export const tiptapHtml = (content: string) =>
         font-weight: 700;
       }
 
-      .ProseMirror figure[data-type='imageBlock'] {
+      .dark .ProseMirror pre {
+        background-color: #171717;
+        border-color: #262626;
+      }
+
+      /* Image Block */
+      .ProseMirror [data-type='imageBlock'] {
         margin: 0;
       }
 
-      .ProseMirror figure[data-type='imageBlock'] img {
+      .ProseMirror [data-type='imageBlock'] img {
         border-radius: 0.25rem;
         display: block;
         width: 100%;
       }
 
       /* Block Quote */
-      .ProseMirror figure[data-type='blockquoteFigure'] {
-        margin-top: 3.5rem;
-        margin-bottom: 3.5rem;
-        color: black;
-      }
-
-      .ProseMirror > blockquote blockquote,
-      .ProseMirror [data-type='blockquoteFigure'] blockquote {
-        margin: 0;
-      }
-
-      .ProseMirror > blockquote blockquote > *:first-child,
-      .ProseMirror [data-type='blockquoteFigure'] blockquote > *:first-child {
+      .ProseMirror blockquote > *:first-child {
         margin-top: 0;
       }
 
-      .ProseMirror > blockquote blockquote > *:last-child,
-      .ProseMirror [data-type='blockquoteFigure'] blockquote > *:last-child {
-        margin-bottom: 0;
+      .ProseMirror blockquote {
+        border-left: 3px solid rgb(180, 181, 184);
+        margin: 1.5rem 0;
+        padding-left: 1rem;
       }
 
       /* Columns */
@@ -826,6 +688,10 @@ export const tiptapHtml = (content: string) =>
         background-color: #d1d5db;
       }
 
+      .dark .ProseMirror [data-type='details'] > button:hover {
+        background-color: #1f2937;
+      }
+
       .ProseMirror [data-type='details'] > button::before {
         content: '\\25B6';
       }
@@ -860,5 +726,4 @@ export const tiptapHtml = (content: string) =>
   <body>
     <div class="ProseMirror">${content}</div>
   </body>
-</html>
-`;
+</html>`;

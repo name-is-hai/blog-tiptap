@@ -31,8 +31,8 @@
   margin: 0;
 }
 
-.ProseMirror table td p+p,
-.ProseMirror table th p+p {
+.ProseMirror table td p + p,
+.ProseMirror table th p + p {
   margin-top: 0.75rem;
 }
 
@@ -62,104 +62,6 @@
   background-color: rgba(0, 0, 0, 0.05);
   border: 1px double rgba(0, 0, 0, 0.2);
 }
-
-/* .ProseMirror table .grip-column,
-.ProseMirror table .grip-row {
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  z-index: 10;
-}
-
-.ProseMirror table .grip-column {
-  width: calc(100% + 1px);
-  border-left: 1px solid rgba(0, 0, 0, 0.2);
-  height: 0.75rem;
-  left: 0;
-  margin-left: -1px;
-  top: -0.75rem;
-}
-
-.ProseMirror table .grip-column:hover,
-.ProseMirror table .grip-column.selected {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.ProseMirror table .grip-column:hover::before,
-.ProseMirror table .grip-column.selected::before {
-  content: '';
-  width: 0.625rem;
-}
-
-.ProseMirror table .grip-column:hover::before {
-  border-bottom: 2px dotted rgba(0, 0, 0, 0.6);
-}
-
-.ProseMirror table .grip-column.first {
-  border-color: transparent;
-  border-top-left-radius: 0.125rem;
-}
-
-.ProseMirror table .grip-column.last {
-  border-top-right-radius: 0.125rem;
-}
-
-.ProseMirror table .grip-column.selected {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-color: rgba(0, 0, 0, 0.3);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-.ProseMirror table .grip-column.selected::before {
-  border-bottom: 2px dotted #000;
-}
-
-.ProseMirror table .grip-row {
-  height: calc(100% + 1px);
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  left: -0.75rem;
-  width: 0.75rem;
-  top: 0;
-  margin-top: -1px;
-}
-
-.ProseMirror table .grip-row:hover,
-.ProseMirror table .grip-row.selected {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.ProseMirror table .grip-row:hover::before,
-.ProseMirror table .grip-row.selected::before {
-  content: '';
-  height: 0.625rem;
-}
-
-.ProseMirror table .grip-row:hover::before {
-  border-left: 2px dotted rgba(0, 0, 0, 0.6);
-}
-
-.ProseMirror table .grip-row.first {
-  border-color: transparent;
-  border-top-left-radius: 0.125rem;
-}
-
-.ProseMirror table .grip-row.last {
-  border-bottom-left-radius: 0.125rem;
-}
-
-.ProseMirror table .grip-row.selected {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-color: rgba(0, 0, 0, 0.3);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-.ProseMirror table .grip-row.selected::before {
-  border-left: 2px dotted #000;
-} */
-
 
 .dark .ProseMirror table {
   border-color: rgba(255, 255, 255, 0.2);

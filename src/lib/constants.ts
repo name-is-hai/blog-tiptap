@@ -93,3 +93,23 @@ export const DEFAULT_FONT_SIZE_LIST = [
   '48px',
   '72px',
 ] as const;
+
+export const ALLOWED_LOGO_ALIGNMENT = ['left', 'center', 'right'] as const;
+
+export const ALLOWED_BUTTON_BORDER_RADIUS = [
+  'sharp',
+  'smooth',
+  'round',
+] as const;
+
+export const ALLOWED_BUTTON_VARIANT = ['filled', 'outline'] as const;
+
+export const DEFAULT_BUTTON_SIZE_VALUE = 'md' as const;
+
+export const DEFAULT_BUTTON_SIZE_LIST = ['sm', 'md', 'lg', 'xl'] as const;
+export const SIZE_STYLES = {
+  sm: { padding: '0.25rem 0.5rem', fontSize: '0.75rem' },
+  md: { padding: '0.5rem 1rem', fontSize: '0.875rem' },
+  lg: { padding: '1rem 2rem', fontSize: '1rem' },
+  xl: { padding: '1.25rem 2.5rem', fontSize: '1.25rem' },
+};

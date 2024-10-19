@@ -83,34 +83,5 @@ export const FontSizePicker = ({ onChange, value }: FontSizePickerProps) => {
         </Command>
       </PopoverContent>
     </Popover>
-    // <DropdownMenu modal>
-    //   <DropdownMenuTrigger asChild>
-    //     <Button variant={!!currentValue ? 'ghost' : 'default'}>
-    //       {currentSizeLabel}
-    //       <ChevronDown className="w-2 h-2" />
-    //     </Button>
-    //   </DropdownMenuTrigger>
-    //   <DropdownMenuContent>
-    //     <DropdownMenuRadioGroup
-    //       value={currentValue}
-    //       onValueChange={onChange}
-    //     >
-    //       <DropdownMenuRadioItem
-    //         key={DEFAULT_FONT_SIZE_VALUE}
-    //         value={DEFAULT_FONT_SIZE_VALUE}
-    //       >
-    //         {DEFAULT_FONT_SIZE_VALUE}
-    //       </DropdownMenuRadioItem>
-    //       {DEFAULT_FONT_SIZE_LIST.map((size) => (
-    //         <DropdownMenuRadioItem
-    //           key={size}
-    //           value={size}
-    //         >
-    //           {size}
-    //         </DropdownMenuRadioItem>
-    //       ))}
-    //     </DropdownMenuRadioGroup>
-    //   </DropdownMenuContent>
-    // </DropdownMenu>
   );
 };

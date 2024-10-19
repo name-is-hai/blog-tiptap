@@ -1,18 +1,17 @@
-import { getRenderContainer } from '@/lib/utils';
-import { BubbleMenu as BaseBubbleMenu, useEditorState } from '@tiptap/react';
-import { useCallback, useId } from 'react';
-import { sticky } from 'tippy.js';
-import { ColumnLayout } from '../extensions/MultiColumn/Columns';
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
 } from '@/components/ui/tooltip';
+import { getRenderContainer } from '@/lib/utils';
 import { TooltipTrigger } from '@radix-ui/react-tooltip';
-import { Button } from '@/components/ui/button';
+import { BubbleMenu as BaseBubbleMenu, useEditorState } from '@tiptap/react';
 import { Columns2, PanelLeft } from 'lucide-react';
+import { useCallback, useId } from 'react';
+import { sticky } from 'tippy.js';
+import { ColumnLayout } from '../extensions/columns';
 import { MenuProps } from './types';
-
 
 export const ColumnsMenu = ({ editor, appendTo }: MenuProps) => {
   const getReferenceClientRect = useCallback(() => {

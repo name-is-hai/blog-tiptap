@@ -5,6 +5,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import {
+  ALLOWED_BUTTON_BORDER_RADIUS,
+  ALLOWED_BUTTON_VARIANT,
+  SIZE_STYLES,
+} from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { NodeViewProps, NodeViewWrapper } from '@tiptap/react';
 import {
@@ -12,9 +17,9 @@ import {
   AlignHorizontalDistributeStart,
   AlignHorizontalSpaceAround,
 } from 'lucide-react';
-import { ColorHighlightComponent } from '../../menus/components/ColorHighlight';
-import { TextHighlight } from '../../menus/components/TextHighlight';
-import { allowedButtonBorderRadius, allowedButtonVariant } from './button';
+import { ColorHighlightComponent } from '../menus/components/ColorHighlight';
+import { TextHighlight } from '../menus/components/TextHighlight';
+import { ButtonSizePicker } from './ButtonSizePicker';
 const alignments = {
   left: AlignHorizontalDistributeStart,
   center: AlignHorizontalSpaceAround,
@@ -22,7 +27,7 @@ const alignments = {
 };
 const items = {
   style(props: NodeViewProps) {
-    return allowedButtonVariant.map((variant) => ({
+    return ALLOWED_BUTTON_VARIANT.map((variant) => ({
       name: variant,
       isActive: props.node.attrs.variant === variant,
       onClick: () => {
@@ -33,7 +38,7 @@ const items = {
     }));
   },
   cornerRadius(props: NodeViewProps) {
-    return allowedButtonBorderRadius.map((radius) => ({
+    return ALLOWED_BUTTON_BORDER_RADIUS.map((radius) => ({
       name: radius,
       isActive: props.node.attrs.borderRadius === radius,
       onClick: () => {
@@ -62,6 +67,7 @@ export function ButtonComponent(props: NodeViewProps) {
     borderRadius: _radius,
     buttonColor,
     textColor,
+    size,
   } = props.node.attrs;
   const { getPos, editor } = props;
 
@@ -91,6 +97,7 @@ export function ButtonComponent(props: NodeViewProps) {
               )}
               tabIndex={-1}
               style={{
+                ...(SIZE_STYLES[size as keyof typeof SIZE_STYLES] || {}),
                 backgroundColor:
                   variant === 'filled' ? buttonColor : 'transparent',
                 color: textColor,
@@ -211,12 +218,13 @@ export function ButtonComponent(props: NodeViewProps) {
             <div className="flex-1">
               <p className="text-xs font-medium text-gray-500 mb-2">Size</p>
               <div className="flex gap-2">
-                <TextHighlight
-                  action={(color) => {
+                <ButtonSizePicker
+                  onChange={(value) => {
                     props.updateAttributes({
-                      textColor: color,
+                      size: value,
                     });
                   }}
+                  value={size}
                 />
               </div>
             </div>

@@ -4,7 +4,6 @@ import Bold from '@tiptap/extension-bold';
 import BulletList from '@tiptap/extension-bullet-list';
 import Code from '@tiptap/extension-code';
 import { Color } from '@tiptap/extension-color';
-import Dropcursor from '@tiptap/extension-dropcursor';
 import FocusClasses from '@tiptap/extension-focus';
 import Highlight from '@tiptap/extension-highlight';
 import History from '@tiptap/extension-history';
@@ -12,7 +11,6 @@ import Italic from '@tiptap/extension-italic';
 import ListItem from '@tiptap/extension-list-item';
 import OrderedList from '@tiptap/extension-ordered-list';
 import Paragraph from '@tiptap/extension-paragraph';
-import Placeholder from '@tiptap/extension-placeholder';
 import Strike from '@tiptap/extension-strike';
 import Subscript from '@tiptap/extension-subscript';
 import Superscript from '@tiptap/extension-superscript';
@@ -28,40 +26,29 @@ import Typography from '@tiptap/extension-typography';
 import Underline from '@tiptap/extension-underline';
 
 import Emoji from './extensions/Emoji/emoji';
-import Column from './extensions/MultiColumn/Column';
-import Columns from './extensions/MultiColumn/Columns';
 import SlashCommand from './extensions/SlashCommand/slash-command';
-import TableCellBackground from './extensions/Table/cell-background';
-import Table from './extensions/Table/table';
+import ButtonExtension from './extensions/button';
+import TableCellBackground from './extensions/cell-background';
 import CodeBlockLowlight from './extensions/code-block';
+import Column from './extensions/column';
+import Columns from './extensions/columns';
 import Document from './extensions/document';
+import Dropcursor from './extensions/dropcursor';
 import Figcaption from './extensions/figcaption';
+import FileHandler from './extensions/file-handler';
 import FontSize from './extensions/font-size';
 import Heading from './extensions/heading';
 import HorizontalRule from './extensions/horizontal-rule';
 import ImageBlock from './extensions/image-block';
+import ImageUpload from './extensions/image-upload';
 import Link from './extensions/link';
+import Placeholder from './extensions/placeholder';
 import Selection from './extensions/selection';
-import { TrailingNode } from './extensions/trailing-node';
-import { ButtonExtension } from './extensions/Button/button';
+import Table from './extensions/table';
+import TrailingNode from './extensions/trailing-node';
 
 export const ExtensionsKit = () => [
-  Placeholder.configure({
-    includeChildren: true,
-    showOnlyCurrent: false,
-    placeholder: ({ node }) => {
-      const nodeTypeName = node?.type?.name;
-      if (nodeTypeName === 'heading') {
-        return `Heading ${node.attrs.level}`;
-      }
-      if (nodeTypeName === 'table' || nodeTypeName === 'codeBlock') {
-        return '';
-      }
-      // if (pos === 0) {
-      // }
-      return "Press '/' for commands";
-    },
-  }),
+  Placeholder,
   Document,
   Paragraph,
   Text,
@@ -73,10 +60,9 @@ export const ExtensionsKit = () => [
   HorizontalRule,
   History,
   ImageBlock,
-  Dropcursor.configure({
-    width: 2,
-    class: 'ProseMirror-dropcursor border-black',
-  }),
+  ImageUpload,
+  FileHandler,
+  Dropcursor,
   UniqueID.configure({
     types: ['paragraph', 'heading', 'blockquote', 'codeBlock', 'table'],
   }),
